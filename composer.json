@@ -1,0 +1,13 @@
+{
+    "repositories": [
+ 	{
+            "type": "vcs",
+            "url": "https://github.com/bshaffer/oauth2-server-php"
+        }
+    ],
+    "require": {
+        "silex/silex": "1.0.*",
+        "bshaffer/oauth2-server-php": "dev-trunk"
+    },
+    "minimum-stability": "dev"
+}
