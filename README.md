@@ -1,7 +1,9 @@
 OAuth2 Server Demo
 ==================
 
-This is a small app running the [OAuth2 Server](https://github.com/bshaffer/oauth2-server-php) PHP library
+This is a small app running the [OAuth2 Server](https://github.com/bshaffer/oauth2-server-php) PHP library.
+
+[Access the running demo!](http://brentertainment.com/oauth2/)
 
 Installation
 ------------
