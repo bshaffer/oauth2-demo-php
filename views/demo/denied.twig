@@ -1,0 +1,21 @@
+{% extends "demo/base.twig" %}
+
+{% block content %}
+    <h3>Authorization Failed!</h3>
+    <p>
+        It seems authorization has been denied for the following reasons:
+    </p>
+    <ul>
+        <li>
+            {% if app.request.get('error_description') %}
+                {{ app.request.get('error_description')}}
+                {# optional "error_uri" param #}
+                {% if app.request.get('error_uri') %}
+                    (<a href="{{app.request.get('error_uri')}}">more information</a>)
+                {% endif %}
+            {% else %}
+                <em>authorization server did not supply an error message</em>
+            {% endif %}
+        </li>
+    </ul>
+{% endblock %}

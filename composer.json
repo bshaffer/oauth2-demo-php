@@ -1,13 +1,11 @@
 {
-    "repositories": [
- 	{
-            "type": "vcs",
-            "url": "https://github.com/bshaffer/oauth2-server-php"
-        }
-    ],
     "require": {
         "silex/silex": "1.0.*",
-        "bshaffer/oauth2-server-php": "dev-trunk"
+        "symfony/twig-bridge": "2.1.*",
+        "bshaffer/oauth2-server-php": "dev-master"
+    },
+    "autoload" : {
+        "psr-0": {"Demo": "src/"}
     },
     "minimum-stability": "dev"
 }

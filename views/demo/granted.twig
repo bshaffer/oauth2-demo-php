@@ -1,0 +1,13 @@
+{% extends "demo/base.twig" %}
+
+{% block content %}
+    <h3>Authorization Granted!</h3>
+    <p>
+        Here are your friends:
+    </p>
+    <ul>
+        {% for friend in response.friends %}
+            <li>{{ friend }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
