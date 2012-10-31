@@ -60,4 +60,4 @@ request to the APIs.  When you write your OAuth2-compatible servers, you will us
 Contact
 -------
 
-Please contact Brent Shaffer (bshafs <at> gmail <dot> com) for more information
+Please contact Brent Shaffer (bshafs \<at\> gmail \<dot\> com) for more information
