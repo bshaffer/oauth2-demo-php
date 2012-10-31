@@ -5,7 +5,7 @@
         "bshaffer/oauth2-server-php": "dev-master"
     },
     "autoload" : {
-        "psr-0": {"Demo": "src/"}
+        "psr-0": {"Demo": "src/", "LockdIn" : "src/"}
     },
     "minimum-stability": "dev"
 }

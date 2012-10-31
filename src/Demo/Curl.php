@@ -4,6 +4,20 @@ namespace Demo;
 
 class Curl
 {
+    private $options;
+
+    public function __construct($options = array())
+    {
+        $this->options = array_merge(array(
+            'debug'      => false,
+            'http_port'  => '80',
+            'user_agent' => 'PHP-curl-client (https://github.com/bshaffer/oauth2-server-demo)',
+            'timeout'    => 20,
+            'curlopts'   => null,
+            'verifyssl'  => true,
+        ), $options);
+    }
+
     /**
     * Send a request to the server, receive a response
     *
@@ -15,6 +29,8 @@ class Curl
     */
     public function request($url, array $parameters = array(), $httpMethod = 'GET', array $options = array())
     {
+        $options = array_merge($this->options, $options);
+
         $curlOptions = array();
         $headers = array();
 
@@ -61,16 +77,16 @@ class Curl
             CURLOPT_USERAGENT       => $options['user_agent'],
             CURLOPT_FOLLOWLOCATION  => true,
             CURLOPT_RETURNTRANSFER  => true,
-            CURLOPT_TIMEOUT         => $this->options['timeout'],
+            CURLOPT_TIMEOUT         => $options['timeout'],
             CURLOPT_HTTPHEADER      => $headers,
-            CURLOPT_SSL_VERIFYPEER  => !isset($this->options['verifyssl']) || $this->options['verifyssl'],
+            CURLOPT_SSL_VERIFYPEER  => $options['verifyssl'],
         );
 
-        if (isset($this->options['curlopts']) && is_array($this->options['curlopts'])) {
-            $curlOptions += $this->options['curlopts'];
+        if (is_array($options['curlopts'])) {
+            $curlOptions += $options['curlopts'];
         }
 
-        if ($options['proxy']) {
+        if (isset($options['proxy'])) {
             $curlOptions[CURLOPT_PROXY] = $options['proxy'];
         }
 

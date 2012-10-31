@@ -3,6 +3,9 @@
 {% block content %}
     <h3>Authorization Error</h3>
     <p>
-        {{ error }}
+        {{ error.error_description }}
+        {% if error.error_uri is defined %}
+            (<a href="{{error.error_uri}}">more information</a>)
+        {% endif %}
     </p>
 {% endblock %}
