@@ -1,9 +1,7 @@
 OAuth2 Server Demo
 ==================
 
-This is a small app running the [OAuth2 Server](https://github.com/bshaffer/oauth2-server-php) PHP library.
-
-[Access the running demo!](http://brentertainment.com/oauth2/)
+This is a small app running the [OAuth2 Server](https://github.com/bshaffer/oauth2-server-php) PHP library.  You can view the [live demo](http://brentertainment.com/oauth2/) on my blog.
 
 Installation
 ------------
@@ -28,7 +26,7 @@ What does this app do??
 -----------------------
 
 This application simulates two applications talking to each other. The first app, **Demo App**, will make API calls to the
-second app, **Lock'd In**, which authenticates via OAUth2.  To get started, access the Demo App homepage:
+second app, **Lock'd In**, which authenticates via OAuth2.  To get started, access the Demo App homepage:
 
 ![Demo Application Homepage](http://brentertainment.com/other/screenshots/demoapp-authorize.png)
 
@@ -38,8 +36,8 @@ to your information:
 
 ![Lock'd In Authorization Request](http://brentertainment.com/other/screenshots/lockdin-authorize.png)
 
-Once you click `Yes, I Authorize this Request`, you will be redirected back to Demo App with an authorization
-code, which [behind the scenes](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/Demo/DemoControllerProvider.php)
+Once you click *Yes, I Authorize this Request*, you will be redirected back to Demo App with an `authorization
+code`, which [behind the scenes](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/Demo/DemoControllerProvider.php)
 is exchanged for an `access token`.  Once Demo App obtains an access token, it makes another call to the Lock'd In APIs and uses
 the access token to access your information.
 
@@ -52,9 +50,9 @@ The OAuth2 Server
 
 The Lock'd In APIs implement the following OAuth2-compatible endpoints:
 
-   * `/api/authorize` - endpoint to receive an Authorization Code or an Implicit Token Grant
-   * `/api/grant`     - endpoint to receive an Access Token by requesting one of the valid Grant Types
-   * `/api/access`    - endpoint to access the protected resource (in this case, your friends) using an access token
+   * `/api/authorize` - endpoint which grants the Demo App an `authorization code`
+   * `/api/grant`     - endpoint which grants the Demo App an `access_token` when supplied with the authorization code above
+   * `/api/access`    - endpoint which grants the Demo App access to your protected resources (in this case, your friends) when supplied the access token above
 
 These are the three main functions of an OAuth2 server, to authorize the user, grant the user tokens, and validate the token on
 request to the APIs.  When you write your OAuth2-compatible servers, you will use very similar methods
