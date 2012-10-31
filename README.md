@@ -27,20 +27,21 @@ Silex requires you to [configure your web server](http://silex.sensiolabs.org/do
 What does this app do??
 -----------------------
 
-This application simulates two applications talking to each other. The first app is the **Demo** app, which you will see
-by accessing the homepage.  It looks like this:
+This application simulates two applications talking to each other. The first app, **Demo App**, will make API calls to the
+second app, **Lock'd In**, which authenticates via OAUth2.  To get started, access the Demo App homepage:
 
 ![Demo Application Homepage](http://brentertainment.com/other/screenshots/demoapp-authorize.png)
 
-Clicking *Authorize* will send you to the second applicaton, which mimics a data provider (such as twitter, facebook, etc).
-This application, called *Lock'd In*, assumes you are already signed in, and asks if you'd like to grant the Demo app access
+Clicking *Authorize* will send you to Lock'd In, which mimics a data provider (such as twitter, facebook, etc).
+Lock'd In assumes you are already signed in, and asks if you'd like to grant the Demo app access
 to your information:
 
 ![Lock'd In Authorization Request](http://brentertainment.com/other/screenshots/lockdin-authorize.png)
 
-Once you click `Yes, I Authorize this Request`, you will be redirected back to the Demo application with an authorization
+Once you click `Yes, I Authorize this Request`, you will be redirected back to Demo App with an authorization
 code, which [behind the scenes](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/Demo/DemoControllerProvider.php)
-is exchanged for an access token, which is then used to request your information from the Lock'd In API.
+is exchanged for an `access token`.  Once Demo App obtains an access token, it makes another call to the Lock'd In APIs and uses
+the access token to access your information.
 
 If all is successful, your data from Lock'd In will be displayed on the final page:
 
@@ -49,11 +50,16 @@ If all is successful, your data from Lock'd In will be displayed on the final pa
 The OAuth2 Server
 -----------------
 
-The Lock'd In OAuth2 APIs implement the following endpoings:
+The Lock'd In APIs implement the following OAuth2-compatible endpoints:
 
    * `/api/authorize` - endpoint to receive an Authorization Code or an Implicit Token Grant
    * `/api/grant`     - endpoint to receive an Access Token by requesting one of the valid Grant Types
    * `/api/access`    - endpoint to access the protected resource (in this case, your friends) using an access token
 
-These are the three main functions of an OAuth server, to authorize the user, grant the user tokens, and validate the token on
-request to the APIs.
+These are the three main functions of an OAuth2 server, to authorize the user, grant the user tokens, and validate the token on
+request to the APIs.  When you write your OAuth2-compatible servers, you will use very similar methods
+
+Contact
+-------
+
+Please contact Brent Shaffer (bshafs <at> gmail <dot> com) for more information
