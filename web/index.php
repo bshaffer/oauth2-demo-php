@@ -11,7 +11,7 @@ $app['debug'] = true;
 
 /* set up dependency injection container */
 $app['oauth_storage'] = function ($app) {
-    return new OAuth2_Storage_Pdo(array('dsn' => 'sqlite://'.__DIR__.'/../data/oauth.sqlite'));
+    return new OAuth2_Storage_Pdo(array('dsn' => 'sqlite:'.__DIR__.'/../data/oauth.sqlite'));
 };
 
 $app['oauth_server'] = function($app) {
