@@ -452,3 +452,9 @@ article.home section.doc-list nav > ul > li:first-child {
       nav.documentation ul.config, nav.documentation ul.deployment, nav.documentation ul.recipes, nav.documentation ul.plugins {
         margin-left: 2.107em;
         width: 18.495em; } }
+
+
+div.help {
+  font-size: 12px;
+  color: #999;
+}

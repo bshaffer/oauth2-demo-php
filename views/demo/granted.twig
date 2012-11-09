@@ -2,6 +2,7 @@
 
 {% block content %}
     <h3>Authorization Granted!</h3>
+    <pre><code>  Access Token: {{ token }}  </code></pre>
     <p>
         Here are your friends:
     </p>
@@ -10,4 +11,5 @@
             <li>{{ friend }}</li>
         {% endfor %}
     </ul>
+    <div class="help"><em>The API call can be seen at <a href="{{ endpoint }}" target="_blank">{{endpoint}}</a></em></div>
 {% endblock %}

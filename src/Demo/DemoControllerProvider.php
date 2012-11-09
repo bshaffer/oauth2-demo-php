@@ -57,7 +57,7 @@ class DemoControllerProvider implements ControllerProviderInterface
                 // make request to the API for awesome data
                 $endpoint = $app['url_generator']->generate('access', array('access_token' => $token), true);
                 $response = $curl->request($endpoint);
-                return $app['twig']->render('demo/granted.twig', array('response' => json_decode($response['response'], true)));
+                return $app['twig']->render('demo/granted.twig', array('response' => json_decode($response['response'], true), 'token' => $token, 'endpoint' => $endpoint));
             }
 
             return $app['twig']->render('demo/error.twig', array('error' => $error));
