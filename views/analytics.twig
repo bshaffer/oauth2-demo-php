@@ -1,8 +1,8 @@
-{% if app.request.server.has('GOOGLE_ANALYTICS_TRACKING_ID') %}
+{% if app.request.server.has('GOOGLE_ANALYTICS_CODE') %}
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', '{{ app.request.server.get("GOOGLE_ANALYTICS_TRACKING_ID") }}']);
+  _gaq.push(['_setAccount', '{{ app.request.server.get("GOOGLE_ANALYTICS_CODE") }}']);
   _gaq.push(['_trackPageview']);
 
   (function() {
