@@ -27,8 +27,8 @@ $app['oauth_server'] = function($app) {
 
 /* set up routes / controllers */
 // please see the Controller classes in src/Demo/Controller and src/LockdIn/Controller for more information
-$app->mount('/api', new LockdIn\ApiControllerProvider());
-$app->mount('/demo', new Demo\DemoControllerProvider());
+$app->mount('/lockdin', new LockdIn\ControllerProvider());
+$app->mount('/demo', new Demo\ControllerProvider());
 
 $app->get('/', function() use($app) {
     return $app['twig']->render('demo/index.twig');
