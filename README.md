@@ -50,12 +50,14 @@ The OAuth2 Server
 
 The Lock'd In APIs implement the following OAuth2-compatible endpoints:
 
-   * `/api/authorize` - endpoint which grants the Demo App an `authorization code`
-   * `/api/grant`     - endpoint which grants the Demo App an `access_token` when supplied with the authorization code above
-   * `/api/access`    - endpoint which grants the Demo App access to your protected resources (in this case, your friends) when supplied the access token above
+   * `/authorize` - endpoint which grants the Demo App an `authorization code`
+   * `/grant`     - endpoint which grants the Demo App an `access_token` when supplied with the authorization code above
+   * `/access`    - endpoint which grants the Demo App access to your protected resources (in this case, your friends) when supplied the access token above
 
 These are the three main functions of an OAuth2 server, to authorize the user, grant the user tokens, and validate the token on
 request to the APIs.  When you write your OAuth2-compatible servers, you will use very similar methods
+
+> Note: the above API URLs are prefixed with `/lockdin` to namespace the application.
 
 Contact
 -------
