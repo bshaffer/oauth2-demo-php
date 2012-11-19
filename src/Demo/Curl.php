@@ -81,7 +81,7 @@ class Curl
             CURLOPT_SSL_VERIFYPEER  => $options['verifyssl'],
         );
 
-        if (ini_get('open_basedir') == '' && ini_get('safe_mode' == 'Off')) {
+        if (ini_get('open_basedir') == '' && ini_get('safe_mode') != 'On') {
             $curlOptions[CURLOPT_FOLLOWLOCATION] = true;
         }
 
