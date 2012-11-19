@@ -11,7 +11,11 @@ $app['debug'] = true;
 
 /* set up dependency injection container */
 $app['oauth_storage'] = function ($app) {
-    return new OAuth2_Storage_Pdo(array('dsn' => 'sqlite:'.__DIR__.'/../data/oauth.sqlite'));
+    if (!file_exists($sqliteDir = __DIR__.'/../data/oauth.sqlite')) {
+        // generate sqlite if it does not exist
+        include_once(__DIR__.'/../data/rebuild_db.php');
+    }
+    return new OAuth2_Storage_Pdo(array('dsn' => 'sqlite:'.$sqliteDir));
 };
 
 $app['oauth_server'] = function($app) {
