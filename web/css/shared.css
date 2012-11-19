@@ -1,5 +1,4 @@
-.button
-{
+.button {
     color: #333;
     text-shadow: 0 1px 0 white;
     border: 1px solid #D4D4D4;
@@ -28,13 +27,13 @@
 }
 
 .button:hover {
-color: white;
-text-decoration: none;
-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
-border-color: #518CC6;
-border-bottom-color: #2A65A0;
-background: #599BDC;
-background: -moz-linear-gradient(#599BDC, #3072B3);
-background: -webkit-linear-gradient(#599BDC, #3072B3);
--ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#599bdc', endColorstr='#3072b3')";
+    color: white;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+    border-color: #518CC6;
+    border-bottom-color: #2A65A0;
+    background: #599BDC;
+    background: -moz-linear-gradient(#599BDC, #3072B3);
+    background: -webkit-linear-gradient(#599BDC, #3072B3);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#599bdc', endColorstr='#3072b3')";
 }
