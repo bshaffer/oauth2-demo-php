@@ -18,7 +18,7 @@ class ApiControllerProvider implements ControllerProviderInterface
             if (!$app['oauth_server']->validateAuthorizeRequest($app['request'])) {
                 return $app['oauth_server']->getResponse();
             }
-            return $app['twig']->render('api/authorize.twig');
+            return $app['twig']->render('lockdin/authorize.twig');
         })->bind('authorize');
 
         $controllers->post('/authorize', function (Application $app) {
