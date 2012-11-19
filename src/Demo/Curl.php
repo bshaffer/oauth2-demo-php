@@ -75,12 +75,15 @@ class Curl
             CURLOPT_URL             => $url,
             CURLOPT_PORT            => $options['http_port'],
             CURLOPT_USERAGENT       => $options['user_agent'],
-            CURLOPT_FOLLOWLOCATION  => true,
             CURLOPT_RETURNTRANSFER  => true,
             CURLOPT_TIMEOUT         => $options['timeout'],
             CURLOPT_HTTPHEADER      => $headers,
             CURLOPT_SSL_VERIFYPEER  => $options['verifyssl'],
         );
+
+        if (ini_get('open_basedir') == '' && ini_get('safe_mode' == 'Off')) {
+            $curlOptions[CURLOPT_FOLLOWLOCATION] = true;
+        }
 
         if (is_array($options['curlopts'])) {
             $curlOptions += $options['curlopts'];
