@@ -26,7 +26,7 @@ class ControllerProvider implements ControllerProviderInterface
             return $app['oauth_server']->handleAuthorizeRequest($app['request'], $authorized);
         })->bind('authorize_post');
 
-        $controllers->get('/grant', function(Application $app) {
+        $controllers->post('/grant', function(Application $app) {
             return $app['oauth_server']->handleGrantRequest($app['request']);
         })->bind('grant');
 

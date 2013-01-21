@@ -34,7 +34,7 @@ class ControllerProvider implements ControllerProviderInterface
             // call the API using curl
             $curl = new Curl();
             $endpoint = $app['url_generator']->generate('grant', array(), true);
-            $response = $curl->request($endpoint, $query);
+            $response = $curl->request($endpoint, $query, 'POST');
             if (!json_decode($response['response'], true)) {
                 // something went wrong - show the raw response
                 exit($response['response']);

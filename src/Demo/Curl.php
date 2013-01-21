@@ -57,9 +57,11 @@ class Curl
             {
                 $queryString = utf8_encode($this->buildQuery($parameters));
                 $url .= '?' . $queryString;
-            }
-            else
-            {
+            } elseif ('POST' === $httpMethod) {
+                $curlOptions += array(
+                    CURLOPT_POSTFIELDS  => $parameters,
+                );
+            } else {
                 $curlOptions += array(
                     CURLOPT_POSTFIELDS  => json_encode($parameters)
                 );
