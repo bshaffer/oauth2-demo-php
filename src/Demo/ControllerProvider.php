@@ -24,17 +24,20 @@ class ControllerProvider implements ControllerProviderInterface
 
             // exchange authorization code for access token
             $query = array(
-                'grant_type' => 'authorization_code',
-                'code'       => $code,
-                'client_id'  => 'demoapp',
-                'client_secret' => 'demopass',
+                'grant_type'    => 'authorization_code',
+                'code'          => $code,
+                'client_id'     => $app['parameters']['client_id'],
+                'client_secret' => $app['parameters']['client_secret'],
                 'redirect_uri'  => $app['url_generator']->generate('authorize_redirect', array(), true),
             );
 
             // call the API using curl
             $curl = new Curl();
-            $endpoint = $app['url_generator']->generate('grant', array(), true);
-            $response = $curl->request($endpoint, $query, 'POST');
+            $endpoint = $app['parameters']['grant_route'] ?
+                $app['url_generator']->generate($app['parameters']['grant_route'], array(), true) :
+                $app['parameters']['grant_url'];
+
+            $response = $curl->request($endpoint, $query, 'POST', $app['parameters']['curl_options']);
             if (!json_decode($response['response'], true)) {
                 // something went wrong - show the raw response
                 exit($response['response']);

@@ -25,6 +25,15 @@ $app['oauth_server'] = function($app) {
     return $server;
 };
 
+// load the services
+$containerFile = __DIR__.'/../data/services.json';
+if (!file_exists($containerFile)) {
+    // allows you to customize container file
+    $containerFile = $containerFile.'.dist';
+}
+
+$app['parameters'] = json_decode(file_get_contents($containerFile), true);
+
 /* set up routes / controllers */
 // please see the Controller classes in src/Demo/Controller and src/LockdIn/Controller for more information
 $app->mount('/lockdin', new LockdIn\ControllerProvider());
