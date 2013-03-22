@@ -1,0 +1,9 @@
+{
+  "client_id": "demoapp",
+  "client_secret": "demopass",
+  "grant_route": "grant",
+  "grant_url": "",
+  "authorize_route": "authorize",
+  "authorize_url": "",
+  "curl_options": {}
+}
