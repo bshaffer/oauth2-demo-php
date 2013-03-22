@@ -1,0 +1,13 @@
+<p>
+    {% if response.error_description is defined %}
+        {{ response.error_description }}
+        {% if response.error_uri is defined %}
+            (<a href="{{response.error_uri}}">more information</a>)
+        {% endif %}
+    {% else %}
+        <p>
+            Unable to parse response:
+        </p>
+        <code>{{ dump(response) }}<code>
+    {% endif %}
+</p>

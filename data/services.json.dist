@@ -5,5 +5,9 @@
   "grant_url": "",
   "authorize_route": "authorize",
   "authorize_url": "",
-  "curl_options": {}
+  "curl_options": {},
+  "api_route": "access",
+  "api_url": "",
+  "api_method": "GET",
+  "api_params": {}
 }

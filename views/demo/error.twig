@@ -1,12 +1,6 @@
 {% extends "demo/base.twig" %}
 
 {% block content %}
-    <h3>Authorization Error</h3>
-    <p>
-        {{ error.error_description }}
-        {% if error.error_uri is defined %}
-            (<a href="{{error.error_uri}}">more information</a>)
-        {% endif %}
-    </p>
-    <a href="{{ path('homepage') }}">back</a>
+    <h4>Error Retrieving Access Token:</h4>
+    {% include 'demo/_error.twig' %}
 {% endblock %}

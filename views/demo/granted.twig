@@ -14,12 +14,7 @@
         </ul>
     {% else %}
         <h4>Error:</h4>
-        <p>
-            {{ response.error_description }}
-            {% if response.error_uri is defined %}
-                (<a href="{{response.error_uri}}">more information</a>)
-            {% endif %}
-        </p>
+        {% include 'demo/_error.twig' %}
     {% endif %}
     <a href="{{ path('homepage') }}">back</a>
     <div class="help"><em>The API call can be seen at <a href="{{ endpoint }}" target="_blank">{{endpoint}}</a></em></div>

@@ -58,12 +58,16 @@ class ControllerProvider implements ControllerProviderInterface
             if ($response['response']['access_token']) {
                 $token = $response['response']['access_token'];
                 // make request to the API for awesome data
-                $endpoint = $app['url_generator']->generate('access', array('access_token' => $token), true);
-                $response = $curl->request($endpoint);
-                return $app['twig']->render('demo/granted.twig', array('response' => json_decode($response['response'], true), 'token' => $token, 'endpoint' => $endpoint));
+                $params = array_merge(array('access_token' => $token), $app['parameters']['api_params']);
+                $endpoint = $app['parameters']['api_route'] ?
+                    $app['url_generator']->generate($app['parameters']['api_route'], array(), true) :
+                    $app['parameters']['api_url'];
+                $response = $curl->request($endpoint, $params, $app['parameters']['api_method'], $app['parameters']['curl_options']);
+                $json = json_decode($response['response'], true);
+                return $app['twig']->render('demo/granted.twig', array('response' => $json ? $json : $response, 'token' => $token, 'endpoint' => $endpoint));
             }
 
-            return $app['twig']->render('demo/error.twig', array('error' => $error));
+            return $app['twig']->render('demo/error.twig', array('response' => $error));
         })->bind('authorize_redirect');
 
         return $controllers;

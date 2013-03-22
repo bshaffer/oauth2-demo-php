@@ -59,7 +59,7 @@ class Curl
                 $url .= '?' . $queryString;
             } elseif ('POST' === $httpMethod) {
                 $curlOptions += array(
-                    CURLOPT_POSTFIELDS  => $parameters,
+                    CURLOPT_POSTFIELDS  => is_array($parameters) ? http_build_query($parameters) : $parameters,
                 );
             } else {
                 $curlOptions += array(
