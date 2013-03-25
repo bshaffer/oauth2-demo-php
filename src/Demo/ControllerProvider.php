@@ -43,11 +43,7 @@ class ControllerProvider implements ControllerProviderInterface
                 $app['parameters']['grant_url'];
 
             $response = $curl->request($endpoint, $query, 'POST', $app['parameters']['curl_options']);
-            if (!json_decode($response['response'], true)) {
-                // something went wrong - show the raw response
-                exit($response['response']);
-            }
-            $response['response'] = json_decode($response['response'], true);
+            $json = json_decode($response['response'], true);
 
             // render error if applicable
             $error = array();
