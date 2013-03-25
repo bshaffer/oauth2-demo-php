@@ -37,3 +37,24 @@
     background: -webkit-linear-gradient(#599BDC, #3072B3);
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#599bdc', endColorstr='#3072b3')";
 }
+
+.styled-select select {
+   background: transparent;
+   width: 60px;
+   padding: 5px;
+   font-size: 16px;
+   line-height: 1;
+   border: 0;
+   border-radius: 0;
+   height: 24px;
+   -webkit-appearance: none;
+}
+
+.styled-select {
+   width: 60px;
+   height: 24px;
+   overflow: hidden;
+   border: 1px solid #ccc;
+   float:left;
+   margin-right:5px;
+}

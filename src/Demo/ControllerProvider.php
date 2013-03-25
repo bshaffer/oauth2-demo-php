@@ -14,6 +14,11 @@ class ControllerProvider implements ControllerProviderInterface
         // creates a new controller based on the default route
         $controllers = $app['controllers_factory'];
 
+        $controllers->post('/authorized', function(Application $app) {
+            $app['session']->set('config_environment', $app['request']->get('environment'));
+            return $app->redirect($app['url_generator']->generate('homepage'));
+        })->bind('set_environment');
+
         $controllers->get('/authorized', function(Application $app) {
             $server = $app['oauth_server'];
 
@@ -38,11 +43,7 @@ class ControllerProvider implements ControllerProviderInterface
                 $app['parameters']['grant_url'];
 
             $response = $curl->request($endpoint, $query, 'POST', $app['parameters']['curl_options']);
-            if (!json_decode($response['response'], true)) {
-                // something went wrong - show the raw response
-                exit($response['response']);
-            }
-            $response['response'] = json_decode($response['response'], true);
+            $json = json_decode($response['response'], true);
 
             // render error if applicable
             $error = array();
@@ -51,12 +52,12 @@ class ControllerProvider implements ControllerProviderInterface
                 $error['error_description'] = $response['errorMessage'];
             } else {
                 // OAuth error
-                $error = $response['response'];
+                $error = $json;
             }
 
             // if it is succesful, call the API with the retrieved token
-            if ($response['response']['access_token']) {
-                $token = $response['response']['access_token'];
+            if (isset($json['access_token'])) {
+                $token = $json['access_token'];
                 // make request to the API for awesome data
                 $params = array_merge(array('access_token' => $token), $app['parameters']['api_params']);
                 $endpoint = $app['parameters']['api_route'] ?
