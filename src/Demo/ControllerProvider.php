@@ -56,7 +56,7 @@ class ControllerProvider implements ControllerProviderInterface
             }
 
             // if it is succesful, call the API with the retrieved token
-            if ($response['response']['access_token']) {
+            if (isset($response['response']['access_token'])) {
                 $token = $response['response']['access_token'];
                 // make request to the API for awesome data
                 $params = array_merge(array('access_token' => $token), $app['parameters']['api_params']);
