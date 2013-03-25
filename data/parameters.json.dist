@@ -1,10 +1,10 @@
 {
   "client_id": "demoapp",
   "client_secret": "demopass",
-  "grant_route": "grant",
+  "token_route": "grant",
   "authorize_route": "authorize",
-  "curl_options": {},
-  "api_route": "access",
-  "api_method": "GET",
-  "api_params": {}
+  "resource_route": "access",
+  "resource_method": "GET",
+  "resource_params": {},
+  "curl_options": {}
 }
