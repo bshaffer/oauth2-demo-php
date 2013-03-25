@@ -52,12 +52,12 @@ class ControllerProvider implements ControllerProviderInterface
                 $error['error_description'] = $response['errorMessage'];
             } else {
                 // OAuth error
-                $error = $response['response'];
+                $error = $json;
             }
 
             // if it is succesful, call the API with the retrieved token
-            if (isset($response['response']['access_token'])) {
-                $token = $response['response']['access_token'];
+            if (isset($json['access_token'])) {
+                $token = $json['access_token'];
                 // make request to the API for awesome data
                 $params = array_merge(array('access_token' => $token), $app['parameters']['api_params']);
                 $endpoint = $app['parameters']['api_route'] ?
