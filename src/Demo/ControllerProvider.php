@@ -38,9 +38,8 @@ class ControllerProvider implements ControllerProviderInterface
 
             // call the API using curl
             $curl = new Curl();
-            $endpoint = $app['parameters']['grant_route'] ?
-                $app['url_generator']->generate($app['parameters']['grant_route'], array(), true) :
-                $app['parameters']['grant_url'];
+            $grantRoute = $app['parameters']['grant_route'];
+            $endpoint = 0 === strpos($grantRoute, 'http') ? $grantRoute : $app['url_generator']->generate($grantRoute, array(), true);
 
             $response = $curl->request($endpoint, $query, 'POST', $app['parameters']['curl_options']);
             $json = json_decode($response['response'], true);
@@ -60,9 +59,8 @@ class ControllerProvider implements ControllerProviderInterface
                 $token = $json['access_token'];
                 // make request to the API for awesome data
                 $params = array_merge(array('access_token' => $token), $app['parameters']['api_params']);
-                $endpoint = $app['parameters']['api_route'] ?
-                    $app['url_generator']->generate($app['parameters']['api_route'], array(), true) :
-                    $app['parameters']['api_url'];
+                $apiRoute = $app['parameters']['api_route'];
+                $endpoint = 0 === strpos($apiRoute, 'http') ? $apiRoute : $app['url_generator']->generate($apiRoute, array(), true);
                 $response = $curl->request($endpoint, $params, $app['parameters']['api_method'], $app['parameters']['curl_options']);
                 $json = json_decode($response['response'], true);
                 return $app['twig']->render('demo/granted.twig', array('response' => $json ? $json : $response, 'token' => $token, 'endpoint' => $endpoint));

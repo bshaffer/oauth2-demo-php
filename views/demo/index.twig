@@ -9,5 +9,5 @@
     <p>
         Click below to integrate with that service you belong to:
     </p>
-    <a class="button" href="{{ app.parameters.authorize_route ? url(app.parameters.authorize_route) : app.parameters.authorize_url }}?response_type=code&client_id={{app.parameters.client_id}}&redirect_uri={{ url('authorize_redirect')|url_encode() }}">Authorize</a>
+    <a class="button" href="{{ app.parameters.authorize_route|slice(0, 4) == 'http' ? app.parameters.authorize_route : url(app.parameters.authorize_route) }}?response_type=code&client_id={{app.parameters.client_id}}&redirect_uri={{ url('authorize_redirect')|url_encode() }}">Authorize</a>
 {% endblock %}

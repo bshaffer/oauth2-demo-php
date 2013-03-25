@@ -4,4 +4,4 @@ composer.lock
 composer.phar
 autoload.php
 data/oauth.sqlite
-data/services.json
+data/parameters.json

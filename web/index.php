@@ -11,7 +11,7 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 $app['debug'] = true;
 $app['twig']->addExtension(new Demo\Twig\JsonStringifyExtension());
 
-/* set up dependency injection container */
+/** set up dependency injection container */
 $app['oauth_storage'] = function ($app) {
     if (!file_exists($sqliteDir = __DIR__.'/../data/oauth.sqlite')) {
         // generate sqlite if it does not exist
@@ -27,8 +27,8 @@ $app['oauth_server'] = function($app) {
     return $server;
 };
 
-// load the services
-$containerFile = __DIR__.'/../data/services.json';
+/** load the parameters configuration */
+$containerFile = __DIR__.'/../data/parameters.json';
 if (!file_exists($containerFile)) {
     // allows you to customize container file
     $containerFile = $containerFile.'.dist';
@@ -44,7 +44,7 @@ if (!isset($parameters['client_id'])) {
 
 $app['parameters'] = $parameters;
 
-/* set up routes / controllers */
+/** set up routes / controllers */
 // please see the Controller classes in src/Demo/Controller and src/LockdIn/Controller for more information
 $app->mount('/lockdin', new LockdIn\ControllerProvider());
 $app->mount('/demo', new Demo\ControllerProvider());
