@@ -21,7 +21,7 @@ class JsonStringifyExtension extends \Twig_Extension
         }
         $pattern = array(',"', '{', '}');
         $replacement = array(",\n\t\"", "{\n\t", "\n}");
-        return str_replace($pattern, $replacement, $string);
+        return str_replace($pattern, $replacement, json_encode($json));
     }
 
     public function getName()
