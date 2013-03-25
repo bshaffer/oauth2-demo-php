@@ -27,6 +27,9 @@
               <hgroup>
                   <h1>Demo App</h1>
                   <h2>Demo a Better You</h2>
+                      {% if app.environments %}
+                        {% include 'demo/_environment.twig' %}
+                      {% endif %}
               </hgroup>
               <nav class="primary">
                   <ul class="menu">

@@ -1,0 +1,10 @@
+<form method="post" action="{{ url('set_environment') }}" style="margin-top:5px">
+<div class="styled-select">
+  <select name="environment">
+    {% for env in app.environments %}
+       <option{%if app.session.get('config_environment') == env%} selected{%endif%}>{{env}}</option>
+    {% endfor %}
+  </select>
+</div>
+  <input type="submit" class="button" value="Submit" style="float:left"/>
+</form>

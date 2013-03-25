@@ -14,6 +14,11 @@ class ControllerProvider implements ControllerProviderInterface
         // creates a new controller based on the default route
         $controllers = $app['controllers_factory'];
 
+        $controllers->post('/authorized', function(Application $app) {
+            $app['session']->set('config_environment', $app['request']->get('environment'));
+            return $app->redirect($app['url_generator']->generate('homepage'));
+        })->bind('set_environment');
+
         $controllers->get('/authorized', function(Application $app) {
             $server = $app['oauth_server'];
 

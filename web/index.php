@@ -7,6 +7,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+$app->register(new Silex\Provider\SessionServiceProvider());
 $app['debug'] = true;
 
 /* set up dependency injection container */
@@ -32,7 +33,15 @@ if (!file_exists($containerFile)) {
     $containerFile = $containerFile.'.dist';
 }
 
-$app['parameters'] = json_decode(file_get_contents($containerFile), true);
+$app['environments'] = array();
+$parameters = json_decode(file_get_contents($containerFile), true);
+// we are using an array of configurations
+if (!isset($parameters['client_id'])) {
+  $app['environments'] = array_keys($parameters);
+  $parameters = ($env = $app['session']->get('config_environment')) ? $parameters[$env] : array_shift($parameters);
+}
+
+$app['parameters'] = $parameters;
 
 /* set up routes / controllers */
 // please see the Controller classes in src/Demo/Controller and src/LockdIn/Controller for more information
