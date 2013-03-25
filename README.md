@@ -120,7 +120,9 @@ in production.  In addition, you can create multiple environments using the para
         }
     }
 
+This will provide a dropdown at the top which will allow you to switch environments and test multiple OAuth servers
 
+![Demo Application With Environment Select](http://brentertainment.com/other/screenshots/demoapp-environment-select.png)
 
 Contact
 -------
