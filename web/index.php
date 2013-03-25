@@ -9,6 +9,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new Silex\Provider\SessionServiceProvider());
 $app['debug'] = true;
+$app['twig']->addExtension(new Demo\Twig\JsonStringifyExtension());
 
 /* set up dependency injection container */
 $app['oauth_storage'] = function ($app) {
