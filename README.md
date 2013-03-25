@@ -94,8 +94,15 @@ you want to test against:
       "curl_options": { "http_port": 443, "verifyssl": false }
     }
 
-The above example uses a new client to authenticate against a fictional oauth server at `myapp.com`.  This is very useful when testing your application
-in production.  In addition, you can create multiple environments using the parameters.json file, and switch between them:
+The above example uses a new client to authenticate against a fictional oauth server at `myapp.com`.
+This is very useful when testing your application in produciton
+
+>  Note: The curl options are set to ignore an SSL certificate, and the `resource_params` define a fictional debug parameter.
+>  These are not required for your APIs, but is meant as an example what can be done with the configuraiton
+
+###Test in multiple environments
+
+In addition, you can create multiple environments using the parameters.json file, and switch between them:
 
     {
         "LockdIn": {
