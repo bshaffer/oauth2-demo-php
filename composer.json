@@ -3,7 +3,7 @@
         "silex/silex": "1.0.*",
         "symfony/twig-bridge": "2.1.*",
         "bshaffer/oauth2-server-php": "v0.5",
-        "bshaffer/oauth2-server-httpfoundation-bridge": "dev-master"
+        "bshaffer/oauth2-server-httpfoundation-bridge": "v0.5"
     },
     "autoload" : {
         "psr-0": {"Demo": "src/", "LockdIn" : "src/"}
