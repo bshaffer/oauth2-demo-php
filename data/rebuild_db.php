@@ -8,7 +8,7 @@ if (file_exists($dir)) {
     unlink($dir);
 }
 
-if (!is_writable($sqliteDir)) {
+if (!is_writable($dir)) {
     // try to set permissions.
     if (!@chmod(dirname($dir), 0777)) {
         throw new Exception("Unable to write to $dir");
