@@ -8,6 +8,13 @@ if (file_exists($dir)) {
     unlink($dir);
 }
 
+if (!is_writable($sqliteDir)) {
+    // try to set permissions.
+    if (!@chmod(dirname($dir), 0777)) {
+        throw new Exception("Unable to write to $dir");
+    }
+}
+
 // rebuild the DB
 $db = new PDO(sprintf('sqlite://%s', $dir));
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
