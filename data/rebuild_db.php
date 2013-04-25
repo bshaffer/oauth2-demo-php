@@ -11,7 +11,7 @@ if (file_exists($dir)) {
 if (!is_writable($dir)) {
     // try to set permissions.
     if (!@chmod(dirname($dir), 0777)) {
-        throw new Exception("Unable to write to $dir");
+        // throw new Exception("Unable to write to $dir");
     }
 }
 
