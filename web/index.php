@@ -61,7 +61,10 @@ $app->mount('/lockdin', new LockdIn\ControllerProvider());
 $app->mount('/demo', new Demo\ControllerProvider());
 
 $app->get('/', function() use($app) {
-    return $app['twig']->render('demo/index.twig', array('session_id' => session_id()));
+    if (!$app['session']->isStarted()) {
+        $app['session']->start();
+    }
+    return $app['twig']->render('demo/index.twig', array('session_id' => $app['session']->getId()));
 })->bind('homepage');
 
 // create an http foundation request implementing OAuth2_RequestInterface

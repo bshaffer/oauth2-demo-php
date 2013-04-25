@@ -27,7 +27,10 @@ class ControllerProvider implements ControllerProviderInterface
                 return $app['twig']->render('demo/denied.twig');
             }
 
-            if ($app['request']->get('state') !== session_id()) {
+            if (!$app['session']->isStarted()) {
+                $app['session']->start();
+            }
+            if ($app['request']->get('state') !== $app['session']->getId()) {
                 return $app['twig']->render('demo/error.twig', array('response' => array('error_description' => 'Your session has expired.  Please try again.')));
             }
 
