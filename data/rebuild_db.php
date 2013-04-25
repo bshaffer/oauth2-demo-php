@@ -8,15 +8,18 @@ if (file_exists($dir)) {
     unlink($dir);
 }
 
-if (!is_writable($dir)) {
-    // try to set permissions.
-    if (!@chmod(dirname($dir), 0777)) {
-        // throw new Exception("Unable to write to $dir");
+// rebuild the DB
+try {
+    $db = new PDO(sprintf('sqlite://%s', $dir));
+} catch (PDOException $e) {
+    if ($e->getCode() == 14) {
+        throw new Exception("Unable to write to $dir");
+    }
+    else {
+        throw $e;
     }
 }
 
-// rebuild the DB
-$db = new PDO(sprintf('sqlite://%s', $dir));
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->exec('CREATE TABLE oauth_clients (client_id TEXT, client_secret TEXT, redirect_uri TEXT)');
 $db->exec('CREATE TABLE oauth_access_tokens (access_token TEXT, client_id TEXT, user_id TEXT, expires TIMESTAMP, scope TEXT)');
