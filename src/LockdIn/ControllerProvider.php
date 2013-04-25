@@ -14,6 +14,7 @@ class ControllerProvider implements ControllerProviderInterface
         // creates a new controller based on the default route
         $controllers = $app['controllers_factory'];
 
+        /* AUTHORIZE endpoint */
         $controllers->get('/authorize', function (Application $app) {
             if (!$app['oauth_server']->validateAuthorizeRequest($app['request'])) {
                 return $app['oauth_server']->getResponse();
@@ -26,13 +27,15 @@ class ControllerProvider implements ControllerProviderInterface
             return $app['oauth_server']->handleAuthorizeRequest($app['request'], $authorized);
         })->bind('authorize_post');
 
-        $controllers->post('/grant', function(Application $app) {
-            return $app['oauth_server']->handleGrantRequest($app['request']);
+        /* TOKEN endpoint */
+        $controllers->post('/token', function(Application $app) {
+            return $app['oauth_server']->handleTokenRequest($app['request']);
         })->bind('grant');
 
-        $controllers->get('/access', function(Application $app) {
+        /* RESOURCE endpoint */
+        $controllers->get('/resource', function(Application $app) {
             $server = $app['oauth_server'];
-            if (!$server->verifyAccessRequest($app['request'])) {
+            if (!$server->verifyResourceRequest($app['request'])) {
                 return $server->getResponse();
             } else {
                 return new Response(json_encode(array('friends' => array('john', 'matt', 'jane'))));
