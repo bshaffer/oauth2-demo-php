@@ -16,8 +16,9 @@ class ControllerProvider implements ControllerProviderInterface
 
         /* AUTHORIZE endpoint */
         $controllers->get('/authorize', function (Application $app) {
-            if (!$app['oauth_server']->validateAuthorizeRequest($app['request'])) {
-                return $app['oauth_server']->getResponse();
+            $server = $app['oauth_server'];
+            if (!$server->validateAuthorizeRequest($app['request'])) {
+                return $server->getResponse();
             }
             return $app['twig']->render('lockdin/authorize.twig');
         })->bind('authorize');

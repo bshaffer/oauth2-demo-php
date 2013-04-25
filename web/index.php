@@ -13,7 +13,7 @@ $app['debug'] = true;
 $app['twig']->addExtension(new Demo\Twig\JsonStringifyExtension());
 
 /** show all errors! */
-ini_set('display_errors',1);
+ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 /** set up dependency injection container */
@@ -22,17 +22,15 @@ $app['oauth_storage'] = function ($app) {
         // generate sqlite if it does not exist
         include_once(__DIR__.'/../data/rebuild_db.php');
     }
-
     if (!is_readable($sqliteDir)) {
         throw new Exception("Unable to read from $sqliteDir");
     }
-
     return new OAuth2_Storage_Pdo(array('dsn' => 'sqlite:'.$sqliteDir));
 };
 
 $app['oauth_server'] = function($app) {
     /* OAuth2\HttpFondation\Server is a wrapper for OAuth2_Server which returns HttpFoundation\Request instead of OAuth2_Request */
-    $server = new OAuth2\HttpFoundationBridge\Server($app['oauth_storage']);
+    $server = new OAuth2\HttpFoundationBridge\Server($app['oauth_storage'], array('enforce_state' => true));
     $server->addGrantType(new OAuth2_GrantType_AuthorizationCode($app['oauth_storage']));
     return $server;
 };
@@ -63,7 +61,7 @@ $app->mount('/lockdin', new LockdIn\ControllerProvider());
 $app->mount('/demo', new Demo\ControllerProvider());
 
 $app->get('/', function() use($app) {
-    return $app['twig']->render('demo/index.twig');
+    return $app['twig']->render('demo/index.twig', array('session_id' => session_id()));
 })->bind('homepage');
 
 // create an http foundation request implementing OAuth2_RequestInterface
