@@ -2,8 +2,8 @@
     "require": {
         "silex/silex": "dev-master",
         "symfony/twig-bridge": "2.1.*",
-        "bshaffer/oauth2-server-php": "v0.6",
-        "bshaffer/oauth2-server-httpfoundation-bridge": "dev-develop"
+        "bshaffer/oauth2-server-php": "v0.7",
+        "bshaffer/oauth2-server-httpfoundation-bridge": "v0.7"
     },
     "autoload" : {
         "psr-0": {"Demo": "src/", "LockdIn" : "src/"}
