@@ -15,7 +15,7 @@ $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new Silex\Provider\SessionServiceProvider());
 
 $app['debug'] = true;
-$app['twig']->addExtension(new OAuth2_Client\Twig\JsonStringifyExtension());
+$app['twig']->addExtension(new OAuth2Demo\Shared\Twig\JsonStringifyExtension());
 
 /** start the session */
 if (!$app['session']->isStarted()) {
@@ -41,8 +41,8 @@ if (!isset($parameters['client_id'])) {
 $app['parameters'] = $parameters;
 
 /** set up routes / controllers */
-$app->mount('/', new OAuth2_Client\Client());
-$app->mount('/lockdin', new OAuth2_Server\Server());
+$app->mount('/', new OAuth2Demo\Client\Client());
+$app->mount('/lockdin', new OAuth2Demo\Server\Server());
 
 // create an http foundation request implementing OAuth2_RequestInterface
 $request = OAuth2\HttpFoundationBridge\Request::createFromGlobals();

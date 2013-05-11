@@ -1,8 +1,8 @@
 <?php
 
-namespace OAuth2_Client\Controllers;
+namespace OAuth2Demo\Client\Controllers;
 
-use OAuth2_Client\Curl;
+use OAuth2Demo\Shared\Curl;
 use Silex\Application;
 
 class ReceiveAuthorizationCode

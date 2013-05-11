@@ -1,6 +1,6 @@
 <?php
 
-namespace OAuth2_Server\Controllers;
+namespace OAuth2Demo\Server\Controllers;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +15,7 @@ class Resource
 
     public function resource(Application $app)
     {
-        // get the oauth server (configured in src/OAuth2_Server/Server.php)
+        // get the oauth server (configured in src/OAuth2Demo/Server/Server.php)
         $server = $app['oauth_server'];
 
         if (!$server->verifyResourceRequest($app['request'])) {

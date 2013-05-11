@@ -1,6 +1,6 @@
 <?php
 
-namespace OAuth2_Server\Controllers;
+namespace OAuth2Demo\Server\Controllers;
 
 use Silex\Application;
 
@@ -14,7 +14,7 @@ class Token
 
     public function token(Application $app)
     {
-        // get the oauth server (configured in src/OAuth2_Server/Server.php)
+        // get the oauth server (configured in src/OAuth2Demo/Server/Server.php)
         $server = $app['oauth_server'];
 
         return $server->handleTokenRequest($app['request']);

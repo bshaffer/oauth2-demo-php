@@ -1,6 +1,6 @@
 <?php
 
-namespace OAuth2_Client\Controllers;
+namespace OAuth2Demo\Client\Controllers;
 
 use Silex\Application;
 
@@ -10,7 +10,7 @@ class Homepage
     static public function addRoutes($routing)
     {
         $routing->get('/', array(new self(), 'homepage'))->bind('homepage');
-        $routing->post('/set-environment', array(new self(), 'homepage'))->bind('set_environment');
+        $routing->post('/set-environment', array(new self(), 'setEnvironment'))->bind('set_environment');
     }
 
     public function homepage(Application $app)

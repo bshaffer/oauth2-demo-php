@@ -1,6 +1,6 @@
 <?php
 
-namespace OAuth2_Client;
+namespace OAuth2Demo\Client;
 
 use Silex\Application;
 use Silex\ControllerProviderInterface;

@@ -1,7 +1,7 @@
 OAuth2 Server Demo
 ==================
 
-This is a small app running the [OAuth2 Server](https://github.com/bshaffer/oauth2-server-php) PHP library.  You can view the [live demo](http://brentertainment.com/oauth2/) on my blog.
+This is a small app running the [OAuth2 Server](https://github.com/bshaffer/oauth2-server-php) PHP library.  *Before reading any further* you should [experiment with the live demo](http://brentertainment.com/oauth2/).
 
 Installation
 ------------
@@ -37,7 +37,7 @@ to your information:
 ![Lock'd In Authorization Request](http://brentertainment.com/other/screenshots/lockdin-authorize.png)
 
 Once you click *Yes, I Authorize this Request*, you will be redirected back to Demo App with an `authorization
-code`, which [behind the scenes](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2_Client/Controllers/ReceiveAuthorizationCode.php)
+code`, which [behind the scenes](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2DemoClient/Controllers/ReceiveAuthorizationCode.php)
 is exchanged for an `access token`.  Once Demo App obtains an access token, it makes another call to the Lock'd In APIs and uses
 the access token to access your information.
 
@@ -48,17 +48,16 @@ If all is successful, your data from Lock'd In will be displayed on the final pa
 The OAuth2 Server
 -----------------
 
-The controller classes is where the real good stuff is.  See how the OAuth2 Server handles the requests here:
+The *first thing you should do* is take a look at how the OAuth2 Server is created and configured in [src/OAuth2Demo/Server/Server.php](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Server.php).  The *second thing you should do* is look at the code to implement the [Controller Classes](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Controllers), which implement
+the following endpoints:
 
+   * [/authorize](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Controllers/Authorize.php) - endpoint which grants the Demo App an `authorization code`
+   * [/token](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Controllers/Token.php) - endpoint which grants the Demo App an `access_token` when supplied with the authorization code above
+   * [/resource](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Controllers/Resource.php) - endpoint which grants the Demo App access to your protected resources (in this case, your friends) when supplied the access token above
 
-   * [/authorize](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2_Server/Controllers/Authorize.php) - endpoint which grants the Demo App an `authorization code`
-   * [/token](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2_Server/Controllers/Token.php) - endpoint which grants the Demo App an `access_token` when supplied with the authorization code above
-   * [/resource](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2_Server/Controllers/Resource.php) - endpoint which grants the Demo App access to your protected resources (in this case, your friends) when supplied the access token above
+These are the three main functions of the OAuth2 server (authorize the user, grant the user tokens, and validate api calls).  When you write your OAuth2-compatible servers, your interface will be similar.
 
-These are the three main functions of an OAuth2 server, to authorize the user, grant the user tokens, and validate the token on
-request to the APIs.  When you write your OAuth2-compatible servers, you will use very similar methods
-
-> Note: the above urls are prefixed with `/lockdin` to namespace the application.
+> Note: the above urls are prefixed with `/server` to namespace the application.
 
 Test Your Own OAuth2 Server!
 ----------------------------

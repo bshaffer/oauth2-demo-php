@@ -1,6 +1,6 @@
 <?php
 
-namespace OAuth2_Server\Controllers;
+namespace OAuth2Demo\Server\Controllers;
 
 use Silex\Application;
 
@@ -15,7 +15,7 @@ class Authorize
 
     public function authorize(Application $app)
     {
-        // get the oauth server (configured in src/OAuth2_Server/Server.php)
+        // get the oauth server (configured in src/OAuth2Demo/Server/Server.php)
         $server = $app['oauth_server'];
 
         if (!$server->validateAuthorizeRequest($app['request'])) {
@@ -27,7 +27,7 @@ class Authorize
 
     public function authorizeFormSubmit(Application $app)
     {
-        // get the oauth server (configured in src/OAuth2_Server/Server.php)
+        // get the oauth server (configured in src/OAuth2Demo/Server/Server.php)
         $server = $app['oauth_server'];
 
         // check the form data to see if the user authorized the request

@@ -1,6 +1,6 @@
 <?php
 
-namespace OAuth2_Server;
+namespace OAuth2Demo\Server;
 
 use Silex\Application;
 use Silex\ControllerProviderInterface;
@@ -13,12 +13,12 @@ class Server implements ControllerProviderInterface
      */
     public function setup(Application $app)
     {
-        // Ensure our Sqlite database exists
-        if (!file_exists($sqliteFile = __DIR__.'/../../data/oauth.sqlite')) {
+        // ensure our Sqlite database exists
+        if (!file_exists($sqliteFile = __DIR__.'/../../../data/oauth.sqlite')) {
             $this->generateSqliteDb();
         }
 
-        // Create PDO-based sqlite storage
+        // create PDO-based sqlite storage
         $storage = new \OAuth2_Storage_Pdo(array('dsn' => 'sqlite:'.$sqliteFile));
 
         // use HttpFountation Server, which returns a silex-compatible request object (https://github.com/bshaffer/oauth2-server-httpfoundation-bridge)
@@ -28,7 +28,7 @@ class Server implements ControllerProviderInterface
         $grantType = new \OAuth2_GrantType_AuthorizationCode($storage);
         $server->addGrantType($grantType);
 
-        // add the server to the silex "container" so we can use it in our controllers (see src/OAuth2_Server/Controllers/.*)
+        // add the server to the silex "container" so we can use it in our controllers (see src/OAuth2Demo/Server/Controllers/.*)
         $app['oauth_server'] = $server;
     }
 
@@ -53,6 +53,6 @@ class Server implements ControllerProviderInterface
 
     private function generateSqliteDb()
     {
-        include_once(__DIR__.'/../../data/rebuild_db.php');
+        include_once(__DIR__.'/../../../data/rebuild_db.php');
     }
 }

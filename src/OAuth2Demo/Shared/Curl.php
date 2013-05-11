@@ -1,6 +1,6 @@
 <?php
 
-namespace OAuth2_Client;
+namespace OAuth2Demo\Shared;
 
 class Curl
 {
