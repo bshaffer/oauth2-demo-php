@@ -18,8 +18,8 @@
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
 
-        {% include 'analytics.twig' %}
-        {% include 'github.twig' %}
+        {% include '_analytics.twig' %}
+        {% include '_github.twig' %}
 
         <div id="container">
             <header role="banner">
@@ -28,7 +28,7 @@
                   <h1>Demo App</h1>
                   <h2>Demo a Better You</h2>
                       {% if app.environments %}
-                        {% include 'demo/_environment.twig' %}
+                        {% include 'client/_environment.twig' %}
                       {% endif %}
               </hgroup>
               <nav class="primary">

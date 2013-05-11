@@ -25,8 +25,8 @@ Silex requires you to [configure your web server](http://silex.sensiolabs.org/do
 What does this app do??
 -----------------------
 
-This application simulates two applications talking to each other. The first app, **Demo App**, will make API calls to the
-second app, **Lock'd In**, which authenticates via OAuth2.  To get started, access the Demo App homepage:
+This application simulates two applications talking to each other. The first app, **OAuth2 Client**, will make API calls to the
+OAuth2 Server app (aka **Lock'd In**), which authenticates via OAuth2.  To get started, access the Demo App homepage:
 
 ![Demo Application Homepage](http://brentertainment.com/other/screenshots/demoapp-authorize.png)
 
@@ -37,7 +37,7 @@ to your information:
 ![Lock'd In Authorization Request](http://brentertainment.com/other/screenshots/lockdin-authorize.png)
 
 Once you click *Yes, I Authorize this Request*, you will be redirected back to Demo App with an `authorization
-code`, which [behind the scenes](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/Demo/DemoControllerProvider.php)
+code`, which [behind the scenes](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2_Client/Controllers/ReceiveAuthorizationCode.php)
 is exchanged for an `access token`.  Once Demo App obtains an access token, it makes another call to the Lock'd In APIs and uses
 the access token to access your information.
 
@@ -48,11 +48,12 @@ If all is successful, your data from Lock'd In will be displayed on the final pa
 The OAuth2 Server
 -----------------
 
-The Lock'd In APIs implement the following OAuth2-compatible endpoints:
+The controller classes is where the real good stuff is.  See how the OAuth2 Server handles the requests here:
 
-   * `/authorize` - endpoint which grants the Demo App an `authorization code`
-   * `/token`     - endpoint which grants the Demo App an `access_token` when supplied with the authorization code above
-   * `/resource`  - endpoint which grants the Demo App access to your protected resources (in this case, your friends) when supplied the access token above
+
+   * [/authorize](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2_Server/Controllers/Authorize.php) - endpoint which grants the Demo App an `authorization code`
+   * [/token](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2_Server/Controllers/Token.php) - endpoint which grants the Demo App an `access_token` when supplied with the authorization code above
+   * [/resource](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2_Server/Controllers/Resource.php) - endpoint which grants the Demo App access to your protected resources (in this case, your friends) when supplied the access token above
 
 These are the three main functions of an OAuth2 server, to authorize the user, grant the user tokens, and validate the token on
 request to the APIs.  When you write your OAuth2-compatible servers, you will use very similar methods
@@ -80,7 +81,7 @@ Open the parameters.json file, and notice the default configuration:
       "curl_options": {}
     }
 
-This is the configuration for the `LockdIn` demo server.  To test against your own, change those parameters to fit the api server
+This is the configuration for the default `Lock'd In` OAuth2 server.  To test against your own, change those parameters to fit the api server
 you want to test against:
 
     {

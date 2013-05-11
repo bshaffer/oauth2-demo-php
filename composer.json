@@ -6,7 +6,10 @@
         "bshaffer/oauth2-server-httpfoundation-bridge": "v0.7"
     },
     "autoload" : {
-        "psr-0": {"Demo": "src/", "LockdIn" : "src/"}
+        "psr-0": {
+            "OAuth2_Client": "src/",
+            "OAuth2_Server": "src/"
+        }
     },
     "minimum-stability": "dev"
 }

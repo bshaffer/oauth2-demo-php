@@ -1,0 +1,13 @@
+{% extends "client/base.twig" %}
+
+{% block content %}
+    <h3>Token Retrieved!</h3>
+    <pre><code>  Access Token: {{ token }}  </code></pre>
+
+    <p>
+        Now use this token to make a request to the OAuth2 Server's APIs:
+        <a class="button" href="{{ path('request_resource', { 'token': token }) }}">make a resource request</a>
+    </p>
+
+    <a href="{{ path('homepage') }}">back</a>
+{% endblock %}

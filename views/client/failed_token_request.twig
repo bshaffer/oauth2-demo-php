@@ -1,0 +1,8 @@
+{% extends "client/base.twig" %}
+
+{% block content %}
+    <h4>Error Retrieving Access Token:</h4>
+    {% include 'client/_error.twig' %}
+
+    <a href="{{ path('homepage') }}">back</a>
+{% endblock %}

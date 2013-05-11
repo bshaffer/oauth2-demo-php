@@ -1,0 +1,27 @@
+{% extends "client/base.twig" %}
+
+{% block content %}
+    <h3>Resource Request Complete!</h3>
+    {% if response.friends is defined %}
+        <p>
+            You have successfully called the APIs with your Access Token.  Here are your friends:
+        </p>
+
+        <ul>
+            {% for friend in response.friends %}
+                <li>{{ friend }}</li>
+            {% endfor %}
+        </ul>
+
+        <p>Here is the full JSON response: </p>
+
+        <pre>{{ response|json_stringify }}<pre>
+    {% else %}
+        <h4>Response:</h4>
+        {% include 'client/_error.twig' %}
+    {% endif %}
+
+    <div class="help"><em>The API call can be seen at <a href="{{ endpoint }}?access_token={{ token }}" target="_blank">{{endpoint}}</a></em></div>
+
+    <a href="{{ path('homepage') }}">back</a>
+{% endblock %}
