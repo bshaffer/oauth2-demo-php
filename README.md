@@ -3,7 +3,7 @@ OAuth2 Server Demo
 
 This is a small app running the [OAuth2 Server](https://github.com/bshaffer/oauth2-server-php) PHP library.
 
-**Before reading any further!!**: Please [experiment with the live demo](http://brentertainment.com/oauth2/).
+**BEFORE READING ANY FURTHER** please [experiment with the live demo](http://brentertainment.com/oauth2/).
 
 Installation
 ------------
@@ -16,18 +16,22 @@ Then, run composer to install the dependencies
     $ git clone git://github.com/bshaffer/oauth2-server-demo.git
     $ cd oauth2-server-demo
     $ curl -s http://getcomposer.org/installer | php
-    $ composer.phar install
+    $ ./composer.phar install
 
 > composer.phar will be in your local directory.  You can also install this to your bin dir so you do not need to download it each time
 
-**Host File**
+**WebHost Configuration**
 
 Silex requires you to [configure your web server](http://silex.sensiolabs.org/doc/web_servers.html) to run it.
+
+**Permissions**
+
+You will need to run the command `$ chmod -R 777 data/` in the root of your project so that the web server can create the sqlite file.
 
 The OAuth2 Server
 -----------------
 
-The **first thing you should do** is take a look at how the OAuth2 Server is created and configured in [src/OAuth2Demo/Server/Server.php](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Server.php).  The **second thing you should do** is look at the code to implement the [Controller Classes](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Controllers), which implement
+The **first thing you should do** is take a look at how the [OAuth2 Server is configured](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Server.php) (see the `setup` method).  The **second thing you should do** is look at the code to implement the [Controller Classes](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Controllers), which implement
 the following endpoints:
 
    * [/authorize](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Controllers/Authorize.php) - endpoint which grants the Demo App an `authorization code`
