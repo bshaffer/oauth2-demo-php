@@ -1,7 +1,9 @@
 OAuth2 Server Demo
 ==================
 
-This is a small app running the [OAuth2 Server](https://github.com/bshaffer/oauth2-server-php) PHP library.  *Before reading any further* you should [experiment with the live demo](http://brentertainment.com/oauth2/).
+This is a small app running the [OAuth2 Server](https://github.com/bshaffer/oauth2-server-php) PHP library.
+
+**Before reading any further!!**: Please [experiment with the live demo](http://brentertainment.com/oauth2/).
 
 Installation
 ------------
@@ -22,33 +24,10 @@ Then, run composer to install the dependencies
 
 Silex requires you to [configure your web server](http://silex.sensiolabs.org/doc/web_servers.html) to run it.
 
-What does this app do??
------------------------
-
-This application simulates two applications talking to each other. The first app, **OAuth2 Client**, will make API calls to the
-OAuth2 Server app (aka **Lock'd In**), which authenticates via OAuth2.  To get started, access the Demo App homepage:
-
-![Demo Application Homepage](http://brentertainment.com/other/screenshots/demoapp-authorize.png)
-
-Clicking *Authorize* will send you to Lock'd In, which mimics a data provider (such as twitter, facebook, etc).
-Lock'd In assumes you are already signed in, and asks if you'd like to grant the Demo app access
-to your information:
-
-![Lock'd In Authorization Request](http://brentertainment.com/other/screenshots/lockdin-authorize.png)
-
-Once you click *Yes, I Authorize this Request*, you will be redirected back to Demo App with an `authorization
-code`, which [behind the scenes](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2DemoClient/Controllers/ReceiveAuthorizationCode.php)
-is exchanged for an `access token`.  Once Demo App obtains an access token, it makes another call to the Lock'd In APIs and uses
-the access token to access your information.
-
-If all is successful, your data from Lock'd In will be displayed on the final page:
-
-![Demo Application Granted](http://brentertainment.com/other/screenshots/demoapp-granted.png)
-
 The OAuth2 Server
 -----------------
 
-The *first thing you should do* is take a look at how the OAuth2 Server is created and configured in [src/OAuth2Demo/Server/Server.php](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Server.php).  The *second thing you should do* is look at the code to implement the [Controller Classes](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Controllers), which implement
+The **first thing you should do** is take a look at how the OAuth2 Server is created and configured in [src/OAuth2Demo/Server/Server.php](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Server.php).  The **second thing you should do** is look at the code to implement the [Controller Classes](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Controllers), which implement
 the following endpoints:
 
    * [/authorize](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Controllers/Authorize.php) - endpoint which grants the Demo App an `authorization code`
