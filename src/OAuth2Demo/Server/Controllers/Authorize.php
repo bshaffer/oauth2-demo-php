@@ -43,7 +43,10 @@ class Authorize
         // check the form data to see if the user authorized the request
         $authorized = (bool) $app['request']->request->get('authorize');
 
+        // Simulate getting current user from framework
+        $userId = 'SimulatedUserId';
+
         // call the oauth server and return the response
-        return $server->handleAuthorizeRequest($app['request'], $authorized);
+        return $server->handleAuthorizeRequest($app['request'], $authorized, $userId );
     }
 }
