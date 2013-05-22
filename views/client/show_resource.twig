@@ -15,13 +15,13 @@
 
         <p>Here is the full JSON response: </p>
 
-        <pre>{{ response|json_stringify }}<pre>
+        <pre>{{ response|json_stringify }}</pre>
     {% else %}
         <h4>Response:</h4>
         {% include 'client/_error.twig' %}
     {% endif %}
 
-    <div class="help"><em>The API call can be seen at <a href="{{ endpoint }}?access_token={{ token }}" target="_blank">{{endpoint}}</a></em></div>
+    <pre><code>  The API call can be seen at <a href="{{ endpoint }}?access_token={{ token }}" target="_blank">{{endpoint}}</a></code></pre>
 
     <a href="{{ path('homepage') }}">back</a>
 {% endblock %}

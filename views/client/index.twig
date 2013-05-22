@@ -1,13 +1,14 @@
 {% extends "client/base.twig" %}
 
 {% block content %}
-    <h3>Demo App</h3>
+    <h3>OAuth2.0 Demo Application</h3>
     <p>
-        We would like to use your information in order to integrate with your friends,
-        use your personal information for nefarious purposes, and to make your life better somehow.
+        Welcome to the OAuth2.0 Demo Application!  This is an application that demos some of the basic OAuth2.0 Workflows.
     </p>
     <p>
-        Click below to integrate with that service you belong to:
+        The <code>Grant Type</code> used in this example is the <strong>Authorization Code</strong> grant type.
+        This is the most common workflow for OAuth2.0.  Clicking the "Authorize" button below will send you to an
+        OAuth2.0 Server to authorize:
     </p>
     <a class="button" href="{{ app.parameters.authorize_route|slice(0, 4) == 'http' ? app.parameters.authorize_route : url(app.parameters.authorize_route) }}?response_type=code&client_id={{app.parameters.client_id}}&redirect_uri={{ url('authorize_redirect')|url_encode() }}&state={{session_id}}">Authorize</a>
 {% endblock %}

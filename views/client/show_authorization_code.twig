@@ -2,12 +2,14 @@
 
 {% block content %}
     <h3>Authorization Code Retrieved!</h3>
+    <p>We have been given an <strong>Authorization Code</strong> from the OAuth2.0 Server:</p>
     <pre><code>  Authorization Code: {{ code }}  </code></pre>
 
     <p>
-        Now exchange the authorization code for an access token:
-        <a class="button" href="{{ path('request_token', { 'code': code }) }}">make a token request</a>
+        Now exchange the Authorization Code for an <strong>Access Token</strong>:
     <p>
+
+    <a class="button" href="{{ path('request_token', { 'code': code }) }}">make a token request</a>
 
     <div class="help"><em>usually this is done behind the scenes, but we're going step-by-step so you don't miss anything!</em></div>
 
