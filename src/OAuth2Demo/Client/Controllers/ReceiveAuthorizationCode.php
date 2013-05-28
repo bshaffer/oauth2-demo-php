@@ -20,7 +20,7 @@ class ReceiveAuthorizationCode
 
         // the user denied the authorization request
         if (!$code = $request->get('code')) {
-            return $twig->render('client/failed_authorization.twig');
+            return $twig->render('client/failed_authorization.twig', array('response' => $request->getAllQueryParameters()));
         }
 
         // verify the "state" parameter matches this user's session (this is like CSRF - very important!!)
