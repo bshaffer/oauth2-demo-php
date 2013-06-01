@@ -3,12 +3,33 @@ OAuth2 Demo PHP
 
 This is a small app running the [OAuth2 Server](https://github.com/bshaffer/oauth2-server-php) PHP library.
 
-**BEFORE READING ANY FURTHER** please [experiment with the live demo](http://brentertainment.com/oauth2/).
+Definitely try **[experimenting with the live demo](http://brentertainment.com/oauth2/)**, because it's really neat.
+
+What does this app do??
+-----------------------
+
+This application simulates two applications talking to each other. The first app, **OAuth2 Client**, will make API calls to the
+OAuth2 Server app (aka **Lock'd In**), which authenticates via OAuth2.  To get started, access the Demo App homepage:
+
+![Demo Application Homepage](http://brentertainment.com/other/screenshots/demoapp-authorize.png)
+
+Clicking *Authorize* will send you to Lock'd In, which mimics a data provider (such as twitter, facebook, etc).
+Lock'd In assumes you are already signed in, and asks if you'd like to grant the Demo app access
+to your information:
+
+![Lock'd In Authorization Request](http://brentertainment.com/other/screenshots/lockdin-authorize.png)
+
+Once you click *Yes, I Authorize this Request*, you will be redirected back to Demo App with an `authorization
+code`, which [behind the scenes](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2DemoClient/Controllers/ReceiveAuthorizationCode.php)
+is exchanged for an `access token`.  Once Demo App obtains an access token, it makes another call to the Lock'd In APIs and uses
+the access token to access your information.
+
+If all is successful, your data from Lock'd In will be displayed on the final page:
+
+![Demo Application Granted](http://brentertainment.com/other/screenshots/demoapp-granted.png)
 
 Installation
 ------------
-
-**Dependencies**
 
 [Composer](http://getcomposer.org/) is the fastest way to get this app up and running.  First, clone the repository.
 Then, run composer to install the dependencies
@@ -27,6 +48,13 @@ Silex requires you to [configure your web server](http://silex.sensiolabs.org/do
 **Permissions**
 
 You will need to run the command `$ chmod -R 777 data/` in the root of your project so that the web server can create the sqlite file.
+
+The OAuth2 Client
+-----------------
+
+The OAuth2 Client features a redirect to the OAuth2.0 Server, exchanges the Authorization Code for an Access Token, and then calls the
+APIs with the returned Access Token.  The client can be used to test *ANY* OAuth2.0 server, and can be configured to do so using the
+the configuration file defined [below](#test-your-own-oauth2-server).
 
 The OAuth2 Server
 -----------------
