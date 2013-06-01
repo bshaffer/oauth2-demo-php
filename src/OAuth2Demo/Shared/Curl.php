@@ -11,7 +11,7 @@ class Curl
         $this->options = array_merge(array(
             'debug'      => false,
             'http_port'  => '80',
-            'user_agent' => 'PHP-curl-client (https://github.com/bshaffer/oauth2-server-demo)',
+            'user_agent' => 'PHP-curl-client (https://github.com/bshaffer/oauth2-demo-php)',
             'timeout'    => 20,
             'curlopts'   => null,
             'verifyssl'  => true,

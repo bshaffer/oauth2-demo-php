@@ -1,5 +1,5 @@
-OAuth2 Server Demo
-==================
+OAuth2 Demo PHP
+===============
 
 This is a small app running the [OAuth2 Server](https://github.com/bshaffer/oauth2-server-php) PHP library.
 
@@ -13,8 +13,8 @@ Installation
 [Composer](http://getcomposer.org/) is the fastest way to get this app up and running.  First, clone the repository.
 Then, run composer to install the dependencies
 
-    $ git clone git://github.com/bshaffer/oauth2-server-demo.git
-    $ cd oauth2-server-demo
+    $ git clone git://github.com/bshaffer/oauth2-demo-php.git
+    $ cd oauth2-demo-php
     $ curl -s http://getcomposer.org/installer | php
     $ ./composer.phar install
 
@@ -31,12 +31,12 @@ You will need to run the command `$ chmod -R 777 data/` in the root of your proj
 The OAuth2 Server
 -----------------
 
-The **first thing you should do** is take a look at how the [OAuth2 Server is configured](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Server.php) (see the `setup` method).  The **second thing you should do** is look at the code to implement the [Controller Classes](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Controllers), which implement
+The **first thing you should do** is take a look at how the [OAuth2 Server is configured](https://github.com/bshaffer/oauth2-demo-php/blob/master/src/OAuth2Demo/Server/Server.php) (see the `setup` method).  The **second thing you should do** is look at the code to implement the [Controller Classes](https://github.com/bshaffer/oauth2-demo-php/blob/master/src/OAuth2Demo/Server/Controllers), which implement
 the following endpoints:
 
-   * [/authorize](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Controllers/Authorize.php) - endpoint which grants the Demo App an `authorization code`
-   * [/token](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Controllers/Token.php) - endpoint which grants the Demo App an `access_token` when supplied with the authorization code above
-   * [/resource](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2Demo/Server/Controllers/Resource.php) - endpoint which grants the Demo App access to your protected resources (in this case, your friends) when supplied the access token above
+   * [/authorize](https://github.com/bshaffer/oauth2-demo-php/blob/master/src/OAuth2Demo/Server/Controllers/Authorize.php) - endpoint which grants the Demo App an `authorization code`
+   * [/token](https://github.com/bshaffer/oauth2-demo-php/blob/master/src/OAuth2Demo/Server/Controllers/Token.php) - endpoint which grants the Demo App an `access_token` when supplied with the authorization code above
+   * [/resource](https://github.com/bshaffer/oauth2-demo-php/blob/master/src/OAuth2Demo/Server/Controllers/Resource.php) - endpoint which grants the Demo App access to your protected resources (in this case, your friends) when supplied the access token above
 
 These are the three main functions of the OAuth2 server (authorize the user, grant the user tokens, and validate api calls).  When you write your OAuth2-compatible servers, your interface will be similar.
 
@@ -47,7 +47,7 @@ Test Your Own OAuth2 Server!
 
 You can test this application against your own OAuth application with ease.  Just copy over the `parameters.json.dist` file to `parameters.json`:
 
-    $ cd /path/to/oauth2-server-demo
+    $ cd /path/to/oauth2-demo-php
     $ cp data/parameters.json.dist data/parameters.json
 
 Open the parameters.json file, and notice the default configuration:
