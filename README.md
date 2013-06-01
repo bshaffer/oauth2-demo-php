@@ -7,11 +7,11 @@ If this is your first time here, try [experimenting with the live demo](http://b
 
 > This library is running the [OAuth2 Server](https://github.com/bshaffer/oauth2-server-php) PHP library.
 
-What does this app do??
+What Does This App Do??
 -----------------------
 
-This application simulates two applications talking to each other. The first app, **OAuth2 Client**, will make API calls to the
-OAuth2 Server app (aka **Lock'd In**), which authenticates via OAuth2.  To get started, access the Demo App homepage:
+This application simulates the interaction between an **OAuth2 Client** (Demo App) and **OAuth2 Server** (Lock'd In). To get started,
+access the Demo App homepage:
 
 ![Demo Application Homepage](http://brentertainment.com/other/screenshots/demoapp-authorize.png)
 
@@ -29,6 +29,23 @@ the access token to access your information.
 If all is successful, your data from Lock'd In will be displayed on the final page:
 
 ![Demo Application Granted](http://brentertainment.com/other/screenshots/demoapp-granted.png)
+
+The OAuth2 Client can be used to test *ANY* OAuth2.0 server, and can be configured to do so using the
+the configuration file defined [below](#test-your-own-oauth2-server).
+
+The OAuth2 Server
+-----------------
+
+The OAuth2 Server is [created](https://github.com/bshaffer/oauth2-demo-php/blob/master/src/OAuth2Demo/Server/Server.php) (see the `setup` method) and then used in the [Controller Classes](https://github.com/bshaffer/oauth2-demo-php/blob/master/src/OAuth2Demo/Server/Controllers), which implement
+the following endpoints:
+
+   * [/authorize](https://github.com/bshaffer/oauth2-demo-php/blob/master/src/OAuth2Demo/Server/Controllers/Authorize.php) - endpoint which grants the Demo App an `authorization code`
+   * [/token](https://github.com/bshaffer/oauth2-demo-php/blob/master/src/OAuth2Demo/Server/Controllers/Token.php) - endpoint which grants the Demo App an `access_token` when supplied with the authorization code above
+   * [/resource](https://github.com/bshaffer/oauth2-demo-php/blob/master/src/OAuth2Demo/Server/Controllers/Resource.php) - endpoint which grants the Demo App access to your protected resources (in this case, your friends) when supplied the access token above
+
+These are the three main functions of the OAuth2 server (authorize the user, grant the user tokens, and validate api calls).  When you write your OAuth2-compatible servers, your interface will be similar.
+
+> Note: the above urls are prefixed with `/server` to namespace the application.
 
 Installation
 ------------
@@ -50,27 +67,6 @@ Silex requires you to [configure your web server](http://silex.sensiolabs.org/do
 **Permissions**
 
 You will need to run the command `$ chmod -R 777 data/` in the root of your project so that the web server can create the sqlite file.
-
-The OAuth2 Client
------------------
-
-The OAuth2 Client features a redirect to the OAuth2.0 Server, exchanges the Authorization Code for an Access Token, and then calls the
-APIs with the returned Access Token.  The client can be used to test *ANY* OAuth2.0 server, and can be configured to do so using the
-the configuration file defined [below](#test-your-own-oauth2-server).
-
-The OAuth2 Server
------------------
-
-The **first thing you should do** is take a look at how the [OAuth2 Server is configured](https://github.com/bshaffer/oauth2-demo-php/blob/master/src/OAuth2Demo/Server/Server.php) (see the `setup` method).  The **second thing you should do** is look at the code to implement the [Controller Classes](https://github.com/bshaffer/oauth2-demo-php/blob/master/src/OAuth2Demo/Server/Controllers), which implement
-the following endpoints:
-
-   * [/authorize](https://github.com/bshaffer/oauth2-demo-php/blob/master/src/OAuth2Demo/Server/Controllers/Authorize.php) - endpoint which grants the Demo App an `authorization code`
-   * [/token](https://github.com/bshaffer/oauth2-demo-php/blob/master/src/OAuth2Demo/Server/Controllers/Token.php) - endpoint which grants the Demo App an `access_token` when supplied with the authorization code above
-   * [/resource](https://github.com/bshaffer/oauth2-demo-php/blob/master/src/OAuth2Demo/Server/Controllers/Resource.php) - endpoint which grants the Demo App access to your protected resources (in this case, your friends) when supplied the access token above
-
-These are the three main functions of the OAuth2 server (authorize the user, grant the user tokens, and validate api calls).  When you write your OAuth2-compatible servers, your interface will be similar.
-
-> Note: the above urls are prefixed with `/server` to namespace the application.
 
 Test Your Own OAuth2 Server!
 ----------------------------
