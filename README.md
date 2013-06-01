@@ -1,9 +1,11 @@
 OAuth2 Demo PHP
 ===============
 
-This is a small app running the [OAuth2 Server](https://github.com/bshaffer/oauth2-server-php) PHP library.
+This application is designed to demo the workflow between OAuth2.0 Clients and Servers.
 
-Definitely try **[experimenting with the live demo](http://brentertainment.com/oauth2/)**, because it's really neat.
+If this is your first time here, try [experimenting with the live demo](http://brentertainment.com/oauth2/) to get a better feel for OAuth2.0 flows.
+
+> This library is running the [OAuth2 Server](https://github.com/bshaffer/oauth2-server-php) PHP library.
 
 What does this app do??
 -----------------------
