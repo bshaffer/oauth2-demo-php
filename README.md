@@ -10,8 +10,7 @@ If this is your first time here, try [experimenting with the live demo](http://b
 Installation
 ------------
 
-[Composer](http://getcomposer.org/) is the fastest way to get this app up and running.  First, clone the repository.
-Then, run composer to install the dependencies
+Use [Composer](http://getcomposer.org/) to install this application:
 
     $ git clone git://github.com/bshaffer/oauth2-demo-php.git
     $ cd oauth2-demo-php
@@ -26,7 +25,7 @@ Silex requires you to [configure your web server](http://silex.sensiolabs.org/do
 
 **Permissions**
 
-You will need to run the command `$ chmod -R 777 data/` in the root of your project so that the web server can create the sqlite file.
+Run the command `$ chmod -R 777 data/` in the project root so that the web server can create the sqlite file.
 
 What Does This App Do??
 -----------------------
