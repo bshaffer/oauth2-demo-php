@@ -17,8 +17,6 @@ Use [Composer](http://getcomposer.org/) to install this application:
     $ curl -s http://getcomposer.org/installer | php
     $ ./composer.phar install
 
-> `composer.phar` will be placed in your project directory.  Move it to your bin dir so you do not need to download it each time
-
 **WebHost Configuration**
 
 Silex requires you to [configure your web server](http://silex.sensiolabs.org/doc/web_servers.html) to run it.
