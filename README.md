@@ -40,9 +40,10 @@ to your information:
 ![Lock'd In Authorization Request](http://brentertainment.com/other/screenshots/lockdin-authorize.png)
 
 Once you click *Yes, I Authorize this Request*, you will be redirected back to Demo App with an `authorization
-code`, which [behind the scenes](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2DemoClient/Controllers/ReceiveAuthorizationCode.php)
-is exchanged for an `access token`.  Once Demo App obtains an access token, it makes another call to the Lock'd In APIs and uses
-the access token to access your information.
+code`, which
+[the client then exchanges](https://github.com/bshaffer/oauth2-server-demo/blob/master/src/OAuth2DemoClient/Controllers/ReceiveAuthorizationCode.php)
+for an Access Token.  Demo App then makes another call to the Lock'd In APIs and uses the Access Token to retrieve
+the data on your behalf.
 
 If all is successful, your data from Lock'd In will be displayed on the final page:
 
