@@ -7,6 +7,27 @@ If this is your first time here, try [experimenting with the live demo](http://b
 
 > This library is running the [OAuth2 Server](https://github.com/bshaffer/oauth2-server-php) PHP library.
 
+Installation
+------------
+
+[Composer](http://getcomposer.org/) is the fastest way to get this app up and running.  First, clone the repository.
+Then, run composer to install the dependencies
+
+    $ git clone git://github.com/bshaffer/oauth2-demo-php.git
+    $ cd oauth2-demo-php
+    $ curl -s http://getcomposer.org/installer | php
+    $ ./composer.phar install
+
+> composer.phar will be in your local directory.  You can also install this to your bin dir so you do not need to download it each time
+
+**WebHost Configuration**
+
+Silex requires you to [configure your web server](http://silex.sensiolabs.org/doc/web_servers.html) to run it.
+
+**Permissions**
+
+You will need to run the command `$ chmod -R 777 data/` in the root of your project so that the web server can create the sqlite file.
+
 What Does This App Do??
 -----------------------
 
