@@ -17,7 +17,7 @@ Use [Composer](http://getcomposer.org/) to install this application:
     $ curl -s http://getcomposer.org/installer | php
     $ ./composer.phar install
 
-> composer.phar will be in your local directory.  You can also install this to your bin dir so you do not need to download it each time
+> `composer.phar` will be placed in your project directory.  Move it to your bin dir so you do not need to download it each time
 
 **WebHost Configuration**
 
