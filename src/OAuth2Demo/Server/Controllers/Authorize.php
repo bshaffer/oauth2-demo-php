@@ -22,8 +22,11 @@ class Authorize
         // get the oauth server (configured in src/OAuth2Demo/Server/Server.php)
         $server = $app['oauth_server'];
 
+         // get the oauth response (configured in src/OAuth2Demo/Server/Server.php)
+        $response = $app['oauth_response'];
+
         // validate the authorize request.  if it is invalid, redirect back to the client with the errors in tow
-        if (!$server->validateAuthorizeRequest($app['request'])) {
+        if (!$server->validateAuthorizeRequest($app['request'], $response)) {
             return $server->getResponse();
         }
 
@@ -40,10 +43,13 @@ class Authorize
         // get the oauth server (configured in src/OAuth2Demo/Server/Server.php)
         $server = $app['oauth_server'];
 
+         // get the oauth response (configured in src/OAuth2Demo/Server/Server.php)
+        $response = $app['oauth_response'];
+
         // check the form data to see if the user authorized the request
         $authorized = (bool) $app['request']->request->get('authorize');
 
         // call the oauth server and return the response
-        return $server->handleAuthorizeRequest($app['request'], $authorized);
+        return $server->handleAuthorizeRequest($app['request'], $response, $authorized);
     }
 }

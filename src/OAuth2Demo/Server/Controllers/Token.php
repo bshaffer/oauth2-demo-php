@@ -22,7 +22,10 @@ class Token
         // get the oauth server (configured in src/OAuth2Demo/Server/Server.php)
         $server = $app['oauth_server'];
 
+        // get the oauth response (configured in src/OAuth2Demo/Server/Server.php)
+        $response = $app['oauth_response'];
+
         // let the oauth2-server-php library do all the work!
-        return $server->handleTokenRequest($app['request']);
+        return $server->handleTokenRequest($app['request'], $response);
     }
 }

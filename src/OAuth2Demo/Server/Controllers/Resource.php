@@ -23,7 +23,10 @@ class Resource
         // get the oauth server (configured in src/OAuth2Demo/Server/Server.php)
         $server = $app['oauth_server'];
 
-        if (!$server->verifyResourceRequest($app['request'])) {
+        // get the oauth response (configured in src/OAuth2Demo/Server/Server.php)
+        $response = $app['oauth_response'];
+
+        if (!$server->verifyResourceRequest($app['request'], $response)) {
             return $server->getResponse();
         } else {
             // return a fake API response - not that exciting
