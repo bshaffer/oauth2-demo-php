@@ -25,7 +25,7 @@ class Server implements ControllerProviderInterface
         $storage = new Pdo(array('dsn' => 'sqlite:'.$sqliteFile));
 
         // instantiate the oauth server
-        $server = new OAuth2Server($storage, array('enforce_state' => true));
+        $server = new OAuth2Server($storage, array('enforce_state' => true, 'allow_implicit' => true));
 
         // we only need "AuthorizationCode" grant type for this demo (we should show off all grant types eventually!)
         $grantType = new AuthorizationCode($storage);
