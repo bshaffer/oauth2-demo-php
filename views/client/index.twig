@@ -5,10 +5,23 @@
     <p>
         Welcome to the OAuth2.0 Demo Application!  This is an application that demos some of the basic OAuth2.0 Workflows.
     </p>
-    <p>
-        The <code>Grant Type</code> used in this example is the <strong>Authorization Code</strong> grant type.
-        This is the most common workflow for OAuth2.0.  Clicking the "Authorize" button below will send you to an
-        OAuth2.0 Server to authorize:
-    </p>
-    <a class="button" href="{{ app.parameters.authorize_route|slice(0, 4) == 'http' ? app.parameters.authorize_route : url(app.parameters.authorize_route) }}?response_type=code&client_id={{app.parameters.client_id}}&redirect_uri={{ url('authorize_redirect')|url_encode() }}&state={{session_id}}">Authorize</a>
+
+    <article class="tabs">
+
+        <section id="tab1">
+            <h2><a href="#tab1">Authorization Code</a></h2>
+            {% include 'client/grant_types/_authorization_code.twig' %}
+        </section>
+
+        <section id="tab2">
+            <h2><a href="#tab2">Implicit</a></h2>
+            {% include 'client/grant_types/_implicit.twig' %}
+        </section>
+
+        <section id="tab3">
+            <h2><a href="#tab3">User Credentials</a></h2>
+            {% include 'client/grant_types/_implicit.twig' %}
+        </section>
+
+    </article>
 {% endblock %}
