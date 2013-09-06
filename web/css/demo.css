@@ -572,11 +572,11 @@ article.tabs section
   display: block;
   top: 1.8em;
   left: 0;
-  height: 12em;
+  height: 20em;
   padding: 10px 20px;
   background-color: #ddd;
-  border-radius: 5px;
-  box-shadow: 0 3px 3px rgba(1,1,1,0.1);
+  /*border-radius: 5px;*/
+  /*box-shadow: 0 3px 3px rgba(1,1,1,0.1);*/
   z-index: 0;
 }
 
@@ -642,3 +642,5 @@ article.tabs section:target h2
   background-color: #fff;
   z-index: 2;
 }
+
+article ul { list-style-type: none;}
