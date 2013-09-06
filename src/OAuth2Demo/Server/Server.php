@@ -5,6 +5,9 @@ namespace OAuth2Demo\Server;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use OAuth2\HttpFoundationBridge\Response as BridgeResponse;
+use OAuth2\Server as OAuth2Server;
+use OAuth2\Storage\Pdo;
+use OAuth2\GrantType\AuthorizationCode;
 
 class Server implements ControllerProviderInterface
 {
@@ -19,13 +22,13 @@ class Server implements ControllerProviderInterface
         }
 
         // create PDO-based sqlite storage
-        $storage = new \OAuth2_Storage_Pdo(array('dsn' => 'sqlite:'.$sqliteFile));
+        $storage = new Pdo(array('dsn' => 'sqlite:'.$sqliteFile));
 
         // instantiate the oauth server
-        $server = new \OAuth2_Server($storage, array('enforce_state' => true));
+        $server = new OAuth2Server($storage, array('enforce_state' => true));
 
         // we only need "AuthorizationCode" grant type for this demo (we should show off all grant types eventually!)
-        $grantType = new \OAuth2_GrantType_AuthorizationCode($storage);
+        $grantType = new AuthorizationCode($storage);
         $server->addGrantType($grantType);
 
         // add the server to the silex "container" so we can use it in our controllers (see src/OAuth2Demo/Server/Controllers/.*)

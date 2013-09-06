@@ -44,6 +44,6 @@ $app['parameters'] = $parameters;
 $app->mount('/', new OAuth2Demo\Client\Client());
 $app->mount('/lockdin', new OAuth2Demo\Server\Server());
 
-// create an http foundation request implementing OAuth2_RequestInterface
+// create an http foundation request implementing OAuth2\RequestInterface
 $request = OAuth2\HttpFoundationBridge\Request::createFromGlobals();
 $app->run($request);
