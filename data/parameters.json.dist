@@ -6,5 +6,6 @@
   "resource_route": "access",
   "resource_method": "GET",
   "resource_params": {},
+  "user_credentials": ["demouser", "testpass"],
   "curl_options": {}
 }

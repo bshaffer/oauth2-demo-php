@@ -1,0 +1,49 @@
+{% extends "client/base.twig" %}
+
+{% block content %}
+    <h3>Token Retrieved!</h3>
+
+    <pre><code>  Access Token: <span id="access_token_display"><a onclick="showAccessToken();">(click here to pull from URL fragment)</a></span></code></pre>
+
+    <div id="request_resource" style="display:none">
+
+        <p>
+            Now use this token to make a request to the OAuth2.0 Server's APIs:
+        </p>
+
+        <a class="button" href="{{ path('request_resource') }}" onclick="this.href += '?token='+tokenParams.access_token;">make a resource request</a>
+
+        <div class="help"><em>This token can now be used multiple times to make API requests for this user.</em></div>
+
+    </div>
+
+    <a href="{{ path('homepage') }}">back</a>
+
+    <!-- Javascript for pulling the access token from the URL fragment -->
+    <script>
+        // function to parse fragment parameters
+        var parseQueryString = function( queryString ) {
+            var params = {}, queries, temp, i, l;
+
+            // Split into key/value pairs
+            queries = queryString.split("&");
+
+            // Convert the array of strings into an object
+            for ( i = 0, l = queries.length; i < l; i++ ) {
+                temp = queries[i].split('=');
+                params[temp[0]] = temp[1];
+            }
+
+            return params;
+        };
+
+        // get token params from URL fragment
+        var tokenParams = parseQueryString(window.location.hash.substr(1));
+
+        // show the token parsed from the fragment, and show the next step
+        var showAccessToken = function (e) {
+            document.getElementById('access_token_display').innerHTML = tokenParams.access_token;
+            document.getElementById('request_resource').style.display = 'block';
+        }
+    </script>
+{% endblock %}

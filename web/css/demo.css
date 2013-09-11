@@ -555,3 +555,9 @@ pre .deletion {
 pre .tex .formula {
   background: #eee8d5;
 }
+
+/* simpleTabs override */
+.simpleTabs li, .simpleTabs ul {
+  line-height: 1.1em;
+}
+
