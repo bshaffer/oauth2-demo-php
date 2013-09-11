@@ -6,22 +6,14 @@
         Welcome to the OAuth2.0 Demo Application!  This is an application that demos some of the basic OAuth2.0 Workflows.
     </p>
 
-    <article class="tabs">
-
-        <section id="tab1">
-            <h2><a href="#tab1">Authorization Code</a></h2>
-            {% include 'client/grant_types/_authorization_code.twig' %}
-        </section>
-
-        <section id="tab2">
-            <h2><a href="#tab2">Implicit</a></h2>
-            {% include 'client/grant_types/_implicit.twig' %}
-        </section>
-
-        <section id="tab3">
-            <h2><a href="#tab3">User Credentials</a></h2>
-            {% include 'client/grant_types/_user_credentials.twig' %}
-        </section>
-
-    </article>
+    <div class="simpleTabs">
+        <ul class="simpleTabsNavigation">
+            <li><a href="#authcode">Authorization Code</a></li>
+            <li><a href="#implicit">Implicit</a></li>
+            <li><a href="#usercred">User Credentials</a></li>
+        </ul>
+        <div class="simpleTabsContent">{% include 'client/grant_types/_authorization_code.twig' %}</div>
+        <div class="simpleTabsContent">{% include 'client/grant_types/_implicit.twig' %}</div>
+        <div class="simpleTabsContent">{% include 'client/grant_types/_user_credentials.twig' %}</div>
+    </div>
 {% endblock %}
