@@ -21,7 +21,7 @@
         {% include 'client/_error.twig' %}
     {% endif %}
 
-    <pre><code>  The API call can be seen at <a href="{{ endpoint }}?access_token={{ token }}" target="_blank">{{endpoint}}</a></code></pre>
+    <pre><code>  The API call can be seen at <a href="{{ resource_uri }}" target="_blank">{{resource_uri}}</a></code></pre>
 
     <a href="{{ path('homepage') }}">back</a>
 {% endblock %}

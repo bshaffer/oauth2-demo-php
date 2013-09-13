@@ -33,6 +33,8 @@ class RequestResource
         $response = $curl->request($endpoint, $config['resource_params'], $config['resource_method'], $config['curl_options']);
         $json = json_decode($response['response'], true);
 
-        return $twig->render('client/show_resource.twig', array('response' => $json ? $json : $response, 'token' => $token, 'endpoint' => $endpoint));
+        $resource_uri = sprintf('%s%saccess_token=%s', $endpoint, false === strpos($endpoint, '?') ? '?' : '&', $token);
+
+        return $twig->render('client/show_resource.twig', array('response' => $json ? $json : $response, 'resource_uri' => $resource_uri));
     }
 }
