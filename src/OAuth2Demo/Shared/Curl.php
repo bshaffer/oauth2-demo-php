@@ -10,7 +10,7 @@ class Curl
     {
         $this->options = array_merge(array(
             'debug'      => false,
-            'http_port'  => '80',
+            'http_port'  => is_numeric($_SERVER['SERVER_PORT']) ? intval($_SERVER['SERVER_PORT']) : 80,
             'user_agent' => 'PHP-curl-client (https://github.com/bshaffer/oauth2-demo-php)',
             'timeout'    => 20,
             'curlopts'   => null,
