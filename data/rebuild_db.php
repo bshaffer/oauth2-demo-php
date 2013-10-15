@@ -16,7 +16,7 @@ if (!is_writable(__DIR__)) {
 }
 
 // rebuild the DB
-$db = new PDO(sprintf('sqlite://%s', $dbfile));
+$db = new PDO(sprintf('sqlite:%s', $dbfile));
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->exec('CREATE TABLE oauth_clients (client_id TEXT, client_secret TEXT, redirect_uri TEXT)');
 $db->exec('CREATE TABLE oauth_access_tokens (access_token TEXT, client_id TEXT, user_id TEXT, expires TIMESTAMP, scope TEXT)');
