@@ -2,7 +2,6 @@
 
 namespace OAuth2Demo\Client\Controllers;
 
-use OAuth2Demo\Shared\Curl;
 use Silex\Application;
 
 class ReceiveImplicitToken

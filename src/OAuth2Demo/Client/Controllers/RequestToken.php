@@ -2,7 +2,6 @@
 
 namespace OAuth2Demo\Client\Controllers;
 
-use OAuth2Demo\Shared\Curl;
 use Silex\Application;
 
 class RequestToken
@@ -19,7 +18,7 @@ class RequestToken
         $twig   = $app['twig'];          // used to render twig templates
         $config = $app['parameters'];    // the configuration for the current oauth implementation
         $urlgen = $app['url_generator']; // generates URLs based on our routing
-        $curl   = new Curl();            // simple class used to make curl requests
+        $curl   = $app['curl'];          // simple class used to make curl requests
 
         $code = $app['request']->get('code');
 
@@ -53,7 +52,7 @@ class RequestToken
         $twig   = $app['twig'];          // used to render twig templates
         $config = $app['parameters'];    // the configuration for the current oauth implementation
         $urlgen = $app['url_generator']; // generates URLs based on our routing
-        $curl   = new Curl();            // simple class used to make curl requests
+        $curl   = $app['curl'];          // simple class used to make curl requests
 
         $username = $app['request']->get('username');
         $password = $app['request']->get('password');

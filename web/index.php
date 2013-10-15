@@ -39,6 +39,7 @@ if (!isset($parameters['client_id'])) {
     $parameters = isset($parameters[$env]) ? $parameters[$env] : array_shift($parameters);
 }
 $app['parameters'] = $parameters;
+$app['curl'] = new OAuth2Demo\Shared\Curl();
 
 /** set up routes / controllers */
 $app->mount('/', new OAuth2Demo\Client\Client());
