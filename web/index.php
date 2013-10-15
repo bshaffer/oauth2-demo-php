@@ -39,7 +39,10 @@ if (!isset($parameters['client_id'])) {
     $parameters = isset($parameters[$env]) ? $parameters[$env] : array_shift($parameters);
 }
 $app['parameters'] = $parameters;
-$app['curl'] = new OAuth2Demo\Shared\Curl();
+
+// ensures this runs on default port
+$port = is_numeric($_SERVER['SERVER_PORT']) ? intval($_SERVER['SERVER_PORT']) : 80;
+$app['curl'] = new OAuth2Demo\Shared\Curl(array('http_port' => $port));
 
 /** set up routes / controllers */
 $app->mount('/', new OAuth2Demo\Client\Client());
