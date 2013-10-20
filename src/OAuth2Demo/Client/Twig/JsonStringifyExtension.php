@@ -1,6 +1,6 @@
 <?php
 
-namespace OAuth2Demo\Shared\Twig;
+namespace OAuth2Demo\Client\Twig;
 
 class JsonStringifyExtension extends \Twig_Extension
 {
