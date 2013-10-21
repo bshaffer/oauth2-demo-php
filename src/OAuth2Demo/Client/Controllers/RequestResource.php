@@ -3,6 +3,7 @@
 namespace OAuth2Demo\Client\Controllers;
 
 use Silex\Application;
+use Guzzle\Http\Client;
 
 class RequestResource
 {
@@ -16,7 +17,6 @@ class RequestResource
         $twig   = $app['twig'];          // used to render twig templates
         $config = $app['parameters'];    // the configuration for the current oauth implementation
         $urlgen = $app['url_generator']; // generates URLs based on our routing
-        $curl   = $app['curl'];          // simple class used to make curl requests
 
         // pull the token from the request
         $token = $app['request']->get('token');
@@ -29,7 +29,11 @@ class RequestResource
         $endpoint = 0 === strpos($apiRoute, 'http') ? $apiRoute : $urlgen->generate($apiRoute, array(), true);
 
         // make the resource request via curl and decode the json response
-        $response = $curl->request($endpoint, $config['resource_params'], $config['resource_method'], $config['curl_options']);
+        $http = new Client();
+        $method = $config['resource_method'];
+        $request = $http->$method($endpoint, $config['resource_params'], $config['curl_options']);
+        $response = $request->send();
+
         $json = json_decode($response['response'], true);
 
         $resource_uri = sprintf('%s%saccess_token=%s', $endpoint, false === strpos($endpoint, '?') ? '?' : '&', $token);
