@@ -3,6 +3,7 @@
 namespace OAuth2Demo\Client\Controllers;
 
 use Silex\Application;
+use Guzzle\Http\Client;
 
 class RequestToken
 {
@@ -18,7 +19,6 @@ class RequestToken
         $twig   = $app['twig'];          // used to render twig templates
         $config = $app['parameters'];    // the configuration for the current oauth implementation
         $urlgen = $app['url_generator']; // generates URLs based on our routing
-        $curl   = $app['curl'];          // simple class used to make curl requests
 
         $code = $app['request']->get('code');
 
@@ -34,6 +34,11 @@ class RequestToken
         // determine the token endpoint to call based on our config (do this somewhere else?)
         $grantRoute = $config['token_route'];
         $endpoint = 0 === strpos($grantRoute, 'http') ? $grantRoute : $urlgen->generate($grantRoute, array(), true);
+
+        $options = array('debug' => true, 'exceptions' => false, 'proxy' => '127.0.0.1:8888');
+        $http = new Client(null);
+        $request = $http->post($endpoint, null, $query, $options);
+        $response = $request->send();
 
         // make the token request via curl and decode the json response
         $response = $curl->request($endpoint, $query, 'POST', $config['curl_options']);
