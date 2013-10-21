@@ -17,7 +17,7 @@ class Client implements ControllerProviderInterface
         /* Set the container */
         // ensures this runs on default port
         $port = is_numeric($_SERVER['SERVER_PORT']) ? intval($_SERVER['SERVER_PORT']) : 80;
-        $app['curl'] = new Curl\Curl(array('http_port' => $port));
+        $app['curl'] = new Http\Curl(array('http_port' => $port));
         // add twig extension
         $app['twig']->addExtension(new Twig\JsonStringifyExtension());
 
