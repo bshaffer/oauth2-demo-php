@@ -27,7 +27,7 @@ class Client implements ControllerProviderInterface
         // load parameters configuration
         $this->loadParameters($app);
 
-        // create curl client
+        // create http client
         $app['http_client'] = new GuzzleClient();
     }
 
