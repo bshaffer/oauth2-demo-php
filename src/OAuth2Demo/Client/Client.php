@@ -5,6 +5,7 @@ namespace OAuth2Demo\Client;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Silex\Provider\SessionServiceProvider;
+use Guzzle\Http\Client as GuzzleClient;
 
 class Client implements ControllerProviderInterface
 {
@@ -20,15 +21,14 @@ class Client implements ControllerProviderInterface
             $app['session']->start();
         }
 
-        // create curl object and ensure it runs on default port
-        $port = is_numeric($_SERVER['SERVER_PORT']) ? intval($_SERVER['SERVER_PORT']) : 80;
-        $app['curl'] = new Http\Curl(array('http_port' => $port));
-
         // add twig extension
         $app['twig']->addExtension(new Twig\JsonStringifyExtension());
 
         // load parameters configuration
         $this->loadParameters($app);
+
+        // create curl client
+        $app['http_client'] = new GuzzleClient();
     }
 
     /**
