@@ -16,7 +16,7 @@ class RequestResource
         $twig   = $app['twig'];          // used to render twig templates
         $config = $app['parameters'];    // the configuration for the current oauth implementation
         $urlgen = $app['url_generator']; // generates URLs based on our routing
-        $curl   = $app['curl'];          // simple class used to make curl requests
+        $http   = $app['http_client'];   // service to make HTTP requests to the oauth server
 
         // pull the token from the request
         $token = $app['request']->get('token');
@@ -26,11 +26,11 @@ class RequestResource
 
         // determine the resource endpoint to call based on our config (do this somewhere else?)
         $apiRoute = $config['resource_route'];
-        $endpoint = 0 === strpos($apiRoute, 'http') ? $apiRoute : $urlgen->generate($apiRoute, array(), true);
+        $endpoint = 0 === strpos($apiRoute, 'http') ? $apiRoute : $urlgen->generate($apiRoute, $config['resource_params'], true);
 
-        // make the resource request via curl and decode the json response
-        $response = $curl->request($endpoint, $config['resource_params'], $config['resource_method'], $config['curl_options']);
-        $json = json_decode($response['response'], true);
+        // make the resource request and decode the json response
+        $response = $http->get($endpoint, null, $config['http_options'])->send();
+        $json = json_decode((string) $response->getBody(), true);
 
         $resource_uri = sprintf('%s%saccess_token=%s', $endpoint, false === strpos($endpoint, '?') ? '?' : '&', $token);
 

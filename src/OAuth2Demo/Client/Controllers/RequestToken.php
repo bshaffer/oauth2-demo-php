@@ -18,7 +18,7 @@ class RequestToken
         $twig   = $app['twig'];          // used to render twig templates
         $config = $app['parameters'];    // the configuration for the current oauth implementation
         $urlgen = $app['url_generator']; // generates URLs based on our routing
-        $curl   = $app['curl'];          // simple class used to make curl requests
+        $http   = $app['http_client'];   // service to make HTTP requests to the oauth server
 
         $code = $app['request']->get('code');
 
@@ -35,9 +35,9 @@ class RequestToken
         $grantRoute = $config['token_route'];
         $endpoint = 0 === strpos($grantRoute, 'http') ? $grantRoute : $urlgen->generate($grantRoute, array(), true);
 
-        // make the token request via curl and decode the json response
-        $response = $curl->request($endpoint, $query, 'POST', $config['curl_options']);
-        $json = json_decode($response['response'], true);
+        // make the token request via http and decode the json response
+        $response = $http->post($endpoint, null, $query, $config['http_options'])->send();
+        $json = json_decode((string) $response->getBody(), true);
 
         // if it is succesful, display the token in our app
         if (isset($json['access_token'])) {
@@ -52,7 +52,7 @@ class RequestToken
         $twig   = $app['twig'];          // used to render twig templates
         $config = $app['parameters'];    // the configuration for the current oauth implementation
         $urlgen = $app['url_generator']; // generates URLs based on our routing
-        $curl   = $app['curl'];          // simple class used to make curl requests
+        $http   = $app['http_client'];   // simple class used to make http requests
 
         $username = $app['request']->get('username');
         $password = $app['request']->get('password');
@@ -70,9 +70,9 @@ class RequestToken
         $grantRoute = $config['token_route'];
         $endpoint = 0 === strpos($grantRoute, 'http') ? $grantRoute : $urlgen->generate($grantRoute, array(), true);
 
-        // make the token request via curl and decode the json response
-        $response = $curl->request($endpoint, $query, 'POST', $config['curl_options']);
-        $json = json_decode($response['response'], true);
+        // make the token request via http and decode the json response
+        $response = $http->post($endpoint, null, $query, $config['http_options'])->send();
+        $json = json_decode((string) $response->getBody(), true);
 
         // if it is succesful, display the token in our app
         if (isset($json['access_token'])) {

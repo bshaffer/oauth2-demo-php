@@ -3,7 +3,8 @@
         "silex/silex": "dev-master",
         "symfony/twig-bridge": "2.1.*",
         "bshaffer/oauth2-server-php": "v1.0",
-        "bshaffer/oauth2-server-httpfoundation-bridge": "v1.0"
+        "bshaffer/oauth2-server-httpfoundation-bridge": "v1.0",
+        "guzzle/guzzle": "~3.7"
     },
     "autoload" : {
         "psr-0": {

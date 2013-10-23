@@ -4,8 +4,7 @@
   "token_route": "grant",
   "authorize_route": "authorize",
   "resource_route": "access",
-  "resource_method": "GET",
   "resource_params": {},
   "user_credentials": ["demouser", "testpass"],
-  "curl_options": {}
+  "http_options": { "exceptions": false }
 }
