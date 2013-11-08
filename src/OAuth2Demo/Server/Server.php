@@ -9,6 +9,8 @@ use OAuth2\Server as OAuth2Server;
 use OAuth2\Storage\Pdo;
 use OAuth2\GrantType\AuthorizationCode;
 use OAuth2\GrantType\UserCredentials;
+use OAuth2\Storage\Memory;
+use OAuth2\Scope;
 
 class Server implements ControllerProviderInterface
 {
@@ -32,7 +34,20 @@ class Server implements ControllerProviderInterface
         );
 
         // instantiate the oauth server
-        $server = new OAuth2Server($storage, array('enforce_state' => true, 'allow_implicit' => true), $grantTypes);
+        $server = new OAuth2Server ($storage, array('enforce_state' => true, 'allow_implicit' => true), $grantTypes);
+
+        $defaultScope = 'basic';
+        $supportedScopes = array(
+            "HIGH_PRIVILEGED_SCOPE",
+            "LOW_PRIVILEGED_SCOPE"
+        );
+
+        $memory = new Memory(array(
+            'default_scope' => $defaultScope,
+            'supported_scopes' => $supportedScopes
+        ));
+        $scopeUtil = new Scope($memory);
+        $server->setScopeUtil($scopeUtil);
 
         // add the server to the silex "container" so we can use it in our controllers (see src/OAuth2Demo/Server/Controllers/.*)
         $app['oauth_server'] = $server;
