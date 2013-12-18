@@ -29,7 +29,9 @@ class RequestResource
         $endpoint = 0 === strpos($apiRoute, 'http') ? $apiRoute : $urlgen->generate($apiRoute, $config['resource_params'], true);
 
         // make the resource request and decode the json response
-        $response = $http->get($endpoint, null, $config['http_options'])->send();
+        $request = $http->get($endpoint, null, $config['http_options']);
+        $request->getQuery()->set('access_token', $token);
+        $response = $request->send();
         $json = json_decode((string) $response->getBody(), true);
 
         $resource_uri = sprintf('%s%saccess_token=%s', $endpoint, false === strpos($endpoint, '?') ? '?' : '&', $token);
