@@ -31,7 +31,10 @@ class Authorize
         }
 
         // dispaly the "do you want to authorize?" form
-        return $app['twig']->render('server/authorize.twig', array('client_id' => $app['request']->query->get('client_id')));
+        return $app['twig']->render('server/authorize.twig', array(
+            'client_id' => $app['request']->query->get('client_id'),
+            'response_type' => $app['request']->query->get('response_type')
+        ));
     }
 
     /**

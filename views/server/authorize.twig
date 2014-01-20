@@ -19,7 +19,7 @@
         <li>make your life better</li>
         <li>miscellaneous nefarious purposes</li>
     </ul>
-    <p>Click the button below to complete the authorize request and grant an <code>Authoriation Code</code> to {{client_id}}.
+    <p>Click the button below to complete the authorize request and grant an <code>{{ response_type == 'code' ? 'Authoriation Code' : 'Access Token' }}</code> to {{client_id}}.
     <ul class="authorize_options">
         <li>
             <form action="{{ path('authorize_post') ~ '?' ~ app.request.queryString }}" method="post">
