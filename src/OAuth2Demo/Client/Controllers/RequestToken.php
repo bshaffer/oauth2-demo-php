@@ -6,7 +6,7 @@ use Silex\Application;
 
 class RequestToken
 {
-    static public function addRoutes($routing)
+    public static function addRoutes($routing)
     {
         $routing->get('/client/request_token/authorization_code', array(new self(), 'requestTokenWithAuthCode'))->bind('request_token_with_authcode');
         $routing->get('/client/request_token/user_credentials', array(new self(), 'requestTokenWithUserCredentials'))->bind('request_token_with_usercredentials');

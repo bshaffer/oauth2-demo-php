@@ -6,7 +6,7 @@ use Silex\Application;
 
 class RequestResource
 {
-    static public function addRoutes($routing)
+    public static function addRoutes($routing)
     {
         $routing->get('/client/request_resource', array(new self(), 'requestResource'))->bind('request_resource');
     }

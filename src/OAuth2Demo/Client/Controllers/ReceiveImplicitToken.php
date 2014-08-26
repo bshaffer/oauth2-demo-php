@@ -6,7 +6,7 @@ use Silex\Application;
 
 class ReceiveImplicitToken
 {
-    static public function addRoutes($routing)
+    public static function addRoutes($routing)
     {
         $routing->get('/client/receive_implicit_token', array(new self(), 'receiveImplicitToken'))->bind('authorize_redirect_implicit');
     }

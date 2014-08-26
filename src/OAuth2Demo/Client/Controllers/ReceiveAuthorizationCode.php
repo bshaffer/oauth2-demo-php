@@ -6,7 +6,7 @@ use Silex\Application;
 
 class ReceiveAuthorizationCode
 {
-    static public function addRoutes($routing)
+    public static function addRoutes($routing)
     {
         $routing->get('/client/receive_authcode', array(new self(), 'receiveAuthorizationCode'))->bind('authorize_redirect');
     }

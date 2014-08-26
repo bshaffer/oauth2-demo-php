@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 class Resource
 {
     // Connects the routes in Silex
-    static public function addRoutes($routing)
+    public static function addRoutes($routing)
     {
         $routing->get('/resource', array(new self(), 'resource'))->bind('access');
     }

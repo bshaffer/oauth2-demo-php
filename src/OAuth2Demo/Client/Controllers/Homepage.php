@@ -7,7 +7,7 @@ use Silex\Application;
 class Homepage
 {
     // Connects the routes in Silex
-    static public function addRoutes($routing)
+    public static function addRoutes($routing)
     {
         $routing->get('/', array(new self(), 'homepage'))->bind('homepage');
         $routing->post('/set-environment', array(new self(), 'setEnvironment'))->bind('set_environment');
