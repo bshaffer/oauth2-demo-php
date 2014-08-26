@@ -7,7 +7,7 @@ use Silex\Application;
 class Token
 {
     // Connects the routes in Silex
-    static public function addRoutes($routing)
+    public static function addRoutes($routing)
     {
         $routing->post('/token', array(new self(), 'token'))->bind('grant');
     }
