@@ -15,6 +15,8 @@ class RequestToken
 
     public function requestTokenWithAuthCode(Application $app)
     {
+        $this->testForBuiltInWebServer(); // if PHP's built in web server is being used, we cannot contiue
+
         $twig   = $app['twig'];          // used to render twig templates
         $config = $app['parameters'];    // the configuration for the current oauth implementation
         $urlgen = $app['url_generator']; // generates URLs based on our routing
@@ -49,6 +51,8 @@ class RequestToken
 
     public function requestTokenWithUserCredentials(Application $app)
     {
+        $this->testForBuiltInWebServer(); // if PHP's built in web server is being used, we cannot contiue
+
         $twig   = $app['twig'];          // used to render twig templates
         $config = $app['parameters'];    // the configuration for the current oauth implementation
         $urlgen = $app['url_generator']; // generates URLs based on our routing
@@ -80,5 +84,15 @@ class RequestToken
         }
 
         return $twig->render('client/failed_token_request.twig', array('response' => $json ? $json : $response));
+    }
+
+    public function testForBuiltInWebServer()
+    {
+        if (isset($_SERVER['SERVER_SOFTWARE']) && preg_match('/PHP \d+\.\d+\.\d+ Development Server/', $_SERVER['SERVER_SOFTWARE'])) {
+            $message = 'As PHP\'s built-in web-server does not allow for concurrent requests, this will result in deadlock.';
+            $message .= "<br /><br />";
+            $message .= 'You must configure a virtualhost via Apache or another web server to continue.  Sorry!';
+            exit($message);
+        }
     }
 }
