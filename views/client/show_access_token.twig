@@ -8,10 +8,6 @@
     <div class="help"><em>Expires in {{ response.expires_in }} seconds</em></div>
     {% endif %}
 
-    {% if response.refresh_token %}
-    <pre><code>  Refresh Token: {{ response.refresh_token }}  </code></pre>
-    {% endif %}
-
     <p>
         Now use this token to make a request to the OAuth2.0 Server's APIs:
     </p>
@@ -24,13 +20,17 @@
     <hr>
     <br>
 
-    <p>
-        Or you can use the refresh token to renew your access token when it expires:
-    </p>
+    {% if response.refresh_token %}
+        <p>
+            Or you can use the refresh token to renew your access token when it expires:
+        </p>
 
-    <a class="button" href="{{ path('request_token_with_refresh_token', { 'refresh_token': response.refresh_token }) }}">renew your access token</a>
+        <pre><code>  Refresh Token: {{ response.refresh_token }}  </code></pre>
 
-    <div class="help"><em>The refresh token can be used both when the access token has expired and when it hasn't.</em></div>
+        <a class="button" href="{{ path('request_token_with_refresh_token', { 'refresh_token': response.refresh_token }) }}">renew your access token</a>
+
+        <div class="help"><em>The refresh token can be used both when the access token has expired and when it hasn't.</em></div>
+    {% endif %}
 
     <a href="{{ path('homepage') }}">back</a>
 {% endblock %}
