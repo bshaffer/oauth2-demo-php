@@ -1,0 +1,4 @@
+<p>
+    The <code>Refresh Token</code> grant type is typically used in tandem with the <code>Authorization Code</code> grant type. Click the "Authorize" button to receive an authorization code:
+</p>
+<a class="button" href="{{ app.parameters.authorize_route|slice(0, 4) == 'http' ? app.parameters.authorize_route : url(app.parameters.authorize_route) }}?response_type=code&client_id={{app.parameters.client_id}}&redirect_uri={{ url('authorize_redirect', {show_refresh_token:1})|url_encode() }}&state={{session_id}}">Authorize</a>

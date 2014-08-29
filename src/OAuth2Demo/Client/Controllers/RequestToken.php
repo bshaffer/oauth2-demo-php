@@ -23,13 +23,17 @@ class RequestToken
 
         $code = $app['request']->get('code');
 
+        $redirect_uri_params = array_filter(array(
+            'show_refresh_token' => $app['request']->get('show_refresh_token'),
+        ));
+
         // exchange authorization code for access token
         $query = array(
             'grant_type'    => 'authorization_code',
             'code'          => $code,
             'client_id'     => $config['client_id'],
             'client_secret' => $config['client_secret'],
-            'redirect_uri'  => $urlgen->generate('authorize_redirect', array(), true),
+            'redirect_uri'  => $urlgen->generate('authorize_redirect', $redirect_uri_params, true),
         );
 
         // determine the token endpoint to call based on our config (do this somewhere else?)
@@ -42,6 +46,10 @@ class RequestToken
 
         // if it is succesful, display the token in our app
         if (isset($json['access_token'])) {
+            if ($app['request']->get('show_refresh_token')) {
+                return $twig->render('client/show_refresh_token.twig', array('response' => $json));
+            }
+
             return $twig->render('client/show_access_token.twig', array('response' => $json));
         }
 
