@@ -26,7 +26,9 @@ class Resource
         // get the oauth response (configured in src/OAuth2Demo/Server/Server.php)
         $response = $app['oauth_response'];
 
-        if (!$server->verifyResourceRequest($app['request'], $response)) {
+        $requiredScope = $app['request']->get("required_scope");
+
+        if (!$server->verifyResourceRequest($app['request'], $response, $requiredScope)) {
             return $server->getResponse();
         } else {
             // return a fake API response - not that exciting
