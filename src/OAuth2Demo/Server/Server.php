@@ -9,6 +9,7 @@ use OAuth2\Server as OAuth2Server;
 use OAuth2\Storage\Pdo;
 use OAuth2\GrantType\AuthorizationCode;
 use OAuth2\GrantType\UserCredentials;
+use OAuth2\GrantType\RefreshToken;
 
 class Server implements ControllerProviderInterface
 {
@@ -29,6 +30,9 @@ class Server implements ControllerProviderInterface
         $grantTypes = array(
             'authorization_code' => new AuthorizationCode($storage),
             'user_credentials'   => new UserCredentials($storage),
+            'refresh_token'      => new RefreshToken($storage, array(
+                'always_issue_new_refresh_token' => true,
+            )),
         );
 
         // instantiate the oauth server

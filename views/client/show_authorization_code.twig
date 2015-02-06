@@ -9,7 +9,7 @@
         Now exchange the Authorization Code for an <strong>Access Token</strong>:
     <p>
 
-    <a class="button" href="{{ path('request_token_with_authcode', { 'code': code }) }}">make a token request</a>
+    <a class="button" href="{{ path('request_token_with_authcode', { 'code': code, show_refresh_token: app.request.get('show_refresh_token') }) }}">make a token request</a>
 
     <div class="help"><em>usually this is done behind the scenes, but we're going step-by-step so you don't miss anything!</em></div>
 
