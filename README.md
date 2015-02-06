@@ -17,13 +17,18 @@ Use [Composer](http://getcomposer.org/) to install this application:
     $ curl -s http://getcomposer.org/installer | php
     $ ./composer.phar install
 
+The demo app also makes use of SQLite3 so you will need to install the SQLite3 PHP extension.
+
 **WebHost Configuration**
 
 Silex requires you to [configure your web server](http://silex.sensiolabs.org/doc/web_servers.html) to run it.
 
 **Permissions**
 
-Run the command `$ chmod -R 777 data/` in the project root so that the web server can create the sqlite file.
+Run the command `$ chown $WEB_SERVER_USER.$WEB_SERVER_GROUP data/ && chmod 775 $WEB_SERVER_USER.$WEB_SERVER_USER data/` in the project root so that the web server can create the sqlite file.
+
+Where $WEB_SERVER_USER and $WEB_SERVER_GROUP are the user and group your webserver runs as.
+
 
 What Does This App Do??
 -----------------------
@@ -84,6 +89,8 @@ Open the parameters.json file, and notice the default configuration:
       "resource_route": "access",
       "resource_method": "GET",
       "resource_params": {},
+      "user_credentials": ["user", "passwd"],
+      "http_options": { "exceptions": false },
       "curl_options": {}
     }
 
@@ -97,9 +104,21 @@ you want to test against:
       "authorize_route": "https://myapp.com/authorize",
       "resource_route": "https://api.myapp.com/profile",
       "resource_method": "POST",
-      "resource_params": { "debug": true }
+      "user_credentials": ["user", "passwd"],
+      "resource_params": { "debug": true },
+      "http_options": { "exceptions": false },
       "curl_options": { "http_port": 443, "verifyssl": false }
     }
+
+The client_id and client_secret should match what you have in your oauth_clients table, for instance, consider this insert statement:
+```
+mysql> INSERT INTO oauth_clients (client_id, client_secret, redirect_uri) VALUES ("OAuth Demo Application", "a3b4b74330724a927bec", "http://yourdemoapp/web/index.php/client/receive_authcode");
+```
+
+The user_credentials should match what you have in your oauth_users table, for instance:
+```
+mysql> insert into oauth_users values('user','sha1ofthepasswordstring','Name', 'Last');
+```
 
 The above example uses a new client to authenticate against a fictional oauth server at `myapp.com`.
 This is very useful when testing your application in production
