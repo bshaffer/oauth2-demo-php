@@ -21,6 +21,10 @@ Use [Composer](http://getcomposer.org/) to install this application:
 
 Silex requires you to [configure your web server](http://silex.sensiolabs.org/doc/web_servers.html) to run it.
 
+You can use php's *built-in web server*, however, you will need to spin up two instances and specify one of
+them in `data/parameters.json` in order to prevent the server from locking up. The client will issue a request
+to the server, and because PHP's built-in web server is single-threaded, this will result in deadlock.
+
 **Permissions**
 
 Run the command `$ chmod -R 777 data/` in the project root so that the web server can create the sqlite file.

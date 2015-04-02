@@ -16,8 +16,6 @@ class RequestToken
 
     public function requestTokenWithAuthCode(Application $app)
     {
-        $this->testForBuiltInWebServer(); // if PHP's built in web server is being used, we cannot continue
-
         $twig   = $app['twig'];          // used to render twig templates
         $config = $app['parameters'];    // the configuration for the current oauth implementation
         $urlgen = $app['url_generator']; // generates URLs based on our routing
@@ -38,9 +36,15 @@ class RequestToken
             'redirect_uri'  => $urlgen->generate('authorize_redirect', $redirect_uri_params, true),
         );
 
-        // determine the token endpoint to call based on our config (do this somewhere else?)
-        $grantRoute = $config['token_route'];
-        $endpoint = 0 === strpos($grantRoute, 'http') ? $grantRoute : $urlgen->generate($grantRoute, array(), true);
+        // determine the token endpoint to call based on our config
+        $endpoint = $config['token_route'];
+        if (0 !== strpos($endpoint, 'http')) {
+            // if PHP's built in web server is being used, we cannot continue
+            $this->testForBuiltInWebServer();
+
+            // generate the route
+            $endpoint = $urlgen->generate($endpoint, array(), true);
+        }
 
         // make the token request via http and decode the json response
         $response = $http->post($endpoint, null, $query, $config['http_options'])->send();
@@ -60,8 +64,6 @@ class RequestToken
 
     public function requestTokenWithUserCredentials(Application $app)
     {
-        $this->testForBuiltInWebServer(); // if PHP's built in web server is being used, we cannot continue
-
         $twig   = $app['twig'];          // used to render twig templates
         $config = $app['parameters'];    // the configuration for the current oauth implementation
         $urlgen = $app['url_generator']; // generates URLs based on our routing
@@ -79,9 +81,15 @@ class RequestToken
             'password'      => $password,
         );
 
-        // determine the token endpoint to call based on our config (do this somewhere else?)
-        $grantRoute = $config['token_route'];
-        $endpoint = 0 === strpos($grantRoute, 'http') ? $grantRoute : $urlgen->generate($grantRoute, array(), true);
+        // determine the token endpoint to call based on our config
+        $endpoint = $config['token_route'];
+        if (0 !== strpos($endpoint, 'http')) {
+            // if PHP's built in web server is being used, we cannot continue
+            $this->testForBuiltInWebServer();
+
+            // generate the route
+            $endpoint = $urlgen->generate($endpoint, array(), true);
+        }
 
         // make the token request via http and decode the json response
         $response = $http->post($endpoint, null, $query, $config['http_options'])->send();

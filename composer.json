@@ -2,8 +2,8 @@
     "require": {
         "silex/silex": "1.2.*@dev",
         "symfony/twig-bridge": "2.1.*",
-        "bshaffer/oauth2-server-php": "v1.0",
-        "bshaffer/oauth2-server-httpfoundation-bridge": "v1.0",
+        "bshaffer/oauth2-server-php": "v1.6",
+        "bshaffer/oauth2-server-httpfoundation-bridge": "v1.1",
         "guzzle/guzzle": "~3.7"
     },
     "autoload" : {

@@ -23,6 +23,7 @@ class Client implements ControllerProviderInterface
 
         // add twig extension
         $app['twig']->addExtension(new Twig\JsonStringifyExtension());
+        $app['twig']->addFilter(new \Twig_SimpleFilter('base64_decode', 'base64_decode'));
 
         // load parameters configuration
         $this->loadParameters($app);

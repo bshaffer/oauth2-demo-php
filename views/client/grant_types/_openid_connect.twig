@@ -1,0 +1,25 @@
+<p>
+    <strong>OpenID Connect</strong> is a special way of obtaining information about a user. Click the button below to go through the OpenID connect flow. It is initiated with an authorize request (just like in <code>Authorization Code</code>) but with the <code>scope</code> querystring parameter including the value <code>"openid"</code>.
+</p>
+
+
+<p>
+    <a class="button" href="{{ app.parameters.authorize_route|slice(0, 4) == 'http' ? app.parameters.authorize_route : url(app.parameters.authorize_route) }}?response_type=code&client_id={{app.parameters.client_id}}&redirect_uri={{ url('authorize_redirect')|url_encode() }}&scope=openid&state={{session_id}}&nonce={{random()}}">Authorization Code</a>
+    <div class="help">
+        Uses the Authorization Code Grant and adds the "openid" scope parameter. An ID Token comes back with the Access Token
+    </div>
+</p>
+
+<p>
+    <a class="button" href="{{ app.parameters.authorize_route|slice(0, 4) == 'http' ? app.parameters.authorize_route : url(app.parameters.authorize_route) }}?response_type=code%20id_token&client_id={{app.parameters.client_id}}&redirect_uri={{ url('authorize_redirect')|url_encode() }}&scope=openid&state={{session_id}}&nonce={{random()}}">Authorization Code + ID Token</a>
+    <div class="help">
+        Same as above, but with the "code id_token" response type. The ID Token comes back with the Authorization Code.
+    </div>
+</p>
+
+<p>
+    <a class="button" href="{{ app.parameters.authorize_route|slice(0, 4) == 'http' ? app.parameters.authorize_route : url(app.parameters.authorize_route) }}?response_type=token%20id_token&client_id={{app.parameters.client_id}}&redirect_uri={{ url('authorize_redirect_implicit')|url_encode() }}&scope=openid&state={{session_id}}&nonce={{random()}}">Implicit</a>
+    <div class="help">
+        Uses the implicit grant type, but the Access Token also returns with an ID Token.
+    </div>
+</p>

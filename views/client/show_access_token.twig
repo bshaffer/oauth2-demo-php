@@ -16,5 +16,9 @@
 
     <div class="help"><em>This token can now be used multiple times to make API requests for this user.</em></div>
 
+    {% if response.id_token is defined %}
+        {% include 'client/_id_token.twig' with { id_token: response.id_token } %}
+    {% endif %}
+
     <a href="{{ path('homepage') }}">back</a>
 {% endblock %}
