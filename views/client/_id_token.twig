@@ -1,0 +1,15 @@
+<h3>Open ID Connect ID Token</h3>
+<p>
+    Because you requested the token using <code>scope=openid</code>, you have also received an
+    ID token!
+</p>
+
+<pre><code>  ID Token: {{ id_token }}  </code></pre>
+
+{% set jwt = id_token|split('.') %}
+
+<p>This token contains the following information about the user: </p>
+
+<pre>
+{{ jwt[1] | base64_decode | json_stringify }}
+</pre>

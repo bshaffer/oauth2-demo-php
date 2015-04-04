@@ -7,7 +7,8 @@ use Silex\ControllerProviderInterface;
 use OAuth2\HttpFoundationBridge\Response as BridgeResponse;
 use OAuth2\Server as OAuth2Server;
 use OAuth2\Storage\Pdo;
-use OAuth2\GrantType\AuthorizationCode;
+use OAuth2\Storage\Memory;
+use OAuth2\OpenID\GrantType\AuthorizationCode;
 use OAuth2\GrantType\UserCredentials;
 use OAuth2\GrantType\RefreshToken;
 
@@ -36,7 +37,14 @@ class Server implements ControllerProviderInterface
         );
 
         // instantiate the oauth server
-        $server = new OAuth2Server($storage, array('enforce_state' => true, 'allow_implicit' => true), $grantTypes);
+        $server = new OAuth2Server($storage, array(
+            'enforce_state' => true,
+            'allow_implicit' => true,
+            'use_openid_connect' => true,
+            'issuer' => $_SERVER['HTTP_HOST'],
+        ),$grantTypes);
+
+        $server->addStorage($this->getKeyStorage(), 'public_key');
 
         // add the server to the silex "container" so we can use it in our controllers (see src/OAuth2Demo/Server/Controllers/.*)
         $app['oauth_server'] = $server;
@@ -69,6 +77,25 @@ class Server implements ControllerProviderInterface
 
     private function generateSqliteDb()
     {
-        include_once(__DIR__.'/../../../data/rebuild_db.php');
+        include_once($this->getProjectRoot().'/data/rebuild_db.php');
+    }
+
+    private function getKeyStorage()
+    {
+        $publicKey  = file_get_contents($this->getProjectRoot().'/data/pubkey.pem');
+        $privateKey = file_get_contents($this->getProjectRoot().'/data/privkey.pem');
+
+        // create storage
+        $keyStorage = new Memory(array('keys' => array(
+            'public_key'  => $publicKey,
+            'private_key' => $privateKey,
+        )));
+
+        return $keyStorage;
+    }
+
+    private function getProjectRoot()
+    {
+        return dirname(dirname(dirname(__DIR__)));
     }
 }
