@@ -97,7 +97,7 @@ you want to test against:
       "authorize_route": "https://myapp.com/authorize",
       "resource_route": "https://api.myapp.com/profile",
       "resource_method": "POST",
-      "resource_params": { "debug": true }
+      "resource_params": { "debug": true },
       "curl_options": { "http_port": 443, "verifyssl": false }
     }
 
