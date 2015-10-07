@@ -17,7 +17,7 @@ Use [Composer](http://getcomposer.org/) to install this application:
     $ curl -s http://getcomposer.org/installer | php
     $ ./composer.phar install
 
-### WebHost Configuration**
+### WebHost Configuration
 
 #### Configure a Web Server
 
