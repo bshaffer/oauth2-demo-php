@@ -20,6 +20,6 @@
 <p>
     <a class="button" href="{{ app.parameters.authorize_route|slice(0, 4) == 'http' ? app.parameters.authorize_route : url(app.parameters.authorize_route) }}?response_type=token%20id_token&client_id={{app.parameters.client_id}}&redirect_uri={{ url('authorize_redirect_implicit')|url_encode() }}&scope=openid&state={{session_id}}&nonce={{random()}}">Implicit</a>
     <div class="help">
-        Uses the implicit grant type, but the Access Token also returns with an ID Token.
+        Same as above, but with the "token id_token" response type. Similar to the <code>implicit</code> grant type, but the Access Token also returns with an ID Token.
     </div>
 </p>
