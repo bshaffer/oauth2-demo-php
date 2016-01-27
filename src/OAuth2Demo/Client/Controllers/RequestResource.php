@@ -21,12 +21,9 @@ class RequestResource
         // pull the token from the request
         $token = $app['request']->get('token');
 
-        // make the resource request with the token in the request body
-        $config['resource_params']['access_token'] = $token;
-
         // determine the resource endpoint to call based on our config (do this somewhere else?)
         $apiRoute = $config['resource_route'];
-        $endpoint = 0 === strpos($apiRoute, 'http') ? $apiRoute : $urlgen->generate($apiRoute, $config['resource_params'], true);
+        $endpoint = 0 === strpos($apiRoute, 'http') ? $apiRoute : $urlgen->generate($apiRoute, array(), true);
 
         // make the resource request and decode the json response
         $request = $http->get($endpoint, null, $config['http_options']);
@@ -34,8 +31,6 @@ class RequestResource
         $response = $request->send();
         $json = json_decode((string) $response->getBody(), true);
 
-        $resource_uri = sprintf('%s%saccess_token=%s', $endpoint, false === strpos($endpoint, '?') ? '?' : '&', $token);
-
-        return $twig->render('client/show_resource.twig', array('response' => $json ? $json : $response, 'resource_uri' => $resource_uri));
+        return $twig->render('client/show_resource.twig', array('response' => $json ? $json : $response, 'resource_uri' => $request->getUrl()));
     }
 }
