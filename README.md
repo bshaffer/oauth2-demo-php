@@ -10,6 +10,20 @@ If this is your first time here, try [experimenting with the live demo](http://b
 Installation
 ------------
 
+## With Vagrant
+
+    $ vagrant up
+
+### xdebug
+
+- URL: http://localhost:8080
+- Local port (listening): 9000
+- Host IP: 192.168.34.1
+- Guest IP: 192.168.34.2
+- Path map: this/directory/web /var/www/web  
+
+## Locally
+
 Use [Composer](http://getcomposer.org/) to install this application:
 
     $ git clone git://github.com/bshaffer/oauth2-demo-php.git
