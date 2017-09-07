@@ -14,7 +14,7 @@ Installation
 
     $ vagrant up
 
-### xdebug
+### xdebug (Optional)
 
 - URL: http://localhost:8080
 - Local port (listening): 9000
