@@ -22,6 +22,23 @@ Installation
 - Guest IP: 192.168.34.2
 - Path map: `this/directory/web` maps to `/var/www/web`  
 
+For example, if you're using JetBrains PhpStorm:
+
+- Create a new `PHP Web Application`:
+
+![Run/Debug Configurations](http://i.imgur.com/yg2XolG.png "Run/Debug Configurations")
+
+- Add a new server by clicking on the `...` beside `Server`
+- Set the `Host` to `localhost`
+- Set the `Port` to `8080`
+- Map the `web` directory to `/var/www/web`
+
+![Servers](http://i.imgur.com/xeItbEg.png "Servers")
+
+- Set a test breakpoint in the `index.php` and Debug
+
+![Debug](http://i.imgur.com/yArVmvS.png "Debug")
+
 ## Locally
 
 Use [Composer](http://getcomposer.org/) to install this application:
