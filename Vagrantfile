@@ -8,7 +8,8 @@ VAGRANTFILE_API_VERSION = '2'
 
 add-apt-repository ppa:ondrej/php -y
 apt-get update
-apt-get install -y apache2 php5.6 php5.6-curl php5.6-sqlite php-xdebug
+apt-get install -y apache2 php5.6 php5.6-curl php5.6-sqlite php5.6-xdebug curl php5.6-curl zip unzip
+apt remove -y php7.1-cli
 
 # Configure Apache
 echo "<VirtualHost *:8080>
@@ -43,6 +44,9 @@ if [ -e /usr/local/bin/composer ]; then
 else
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 fi
+
+cd /var/www/
+composer install
 
 # Reset home directory of vagrant user
 if ! grep -q "cd /var/www" /home/vagrant/.profile; then
