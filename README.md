@@ -10,9 +10,10 @@ If this is your first time here, try [experimenting with the live demo](http://b
 Installation
 ------------
 
-We have provided a Vagrantfile for easy installation.  Vagrant is software that controls some of the major virtualization software such as [VMWare Workstation](https://www.vmware.com/products/workstation.html) and [Oracle VirtualBox](https://www.virtualbox.org/).  With a simple text file, you can clone a machine to run locally on your computer.  More details can be found at https://www.vagrantup.com. 
-
 ## With Vagrant
+
+We have provided a Vagrantfile for easy installation.  Vagrant is software that controls some of the major virtualization software such as [VMWare Workstation](https://www.vmware.com/products/workstation.html) and [Oracle VirtualBox](https://www.virtualbox.org/).  With a simple text file, you can clone a machine to run locally on your computer.  More details can be found at [https://www.vagrantup.com](https://www.vagrantup.com). 
+
 
     $ vagrant up
     
