@@ -10,6 +10,42 @@ If this is your first time here, try [experimenting with the live demo](http://b
 Installation
 ------------
 
+## With Vagrant
+
+We have provided a Vagrantfile for easy installation.  Vagrant is software that controls some of the major virtualization software such as [VMWare Workstation](https://www.vmware.com/products/workstation.html) and [Oracle VirtualBox](https://www.virtualbox.org/).  With a simple text file, you can clone a machine to run locally on your computer.  More details can be found at [https://www.vagrantup.com](https://www.vagrantup.com). 
+
+
+    $ vagrant up
+    
+Now browse to http://localhost:8080 to see the OAuth2 Demo Application
+
+### xdebug (Optional)
+
+- URL: http://localhost:8080
+- Local port (listening): 9000
+- Host IP: 192.168.34.1
+- Guest IP: 192.168.34.2
+- Path map: `this/directory` maps to `/var/www`  
+
+For example, if you're using JetBrains PhpStorm:
+
+- Create a new `PHP Web Application`:
+
+![Run/Debug Configurations](http://i.imgur.com/yg2XolG.png "Run/Debug Configurations")
+
+- Add a new server by clicking on the `...` beside `Server`
+- Set the `Host` to `localhost`
+- Set the `Port` to `8080`
+- Map this directory to `/var/www/`
+
+![Servers](http://i.imgur.com/xeItbEg.png "Servers")
+
+- Set a test breakpoint in the `index.php` and Debug
+
+![Debug](http://i.imgur.com/yArVmvS.png "Debug")
+
+## Locally
+
 Use [Composer](http://getcomposer.org/) to install this application:
 
     $ git clone git://github.com/bshaffer/oauth2-demo-php.git
