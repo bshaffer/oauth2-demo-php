@@ -20,7 +20,7 @@ Installation
 - Local port (listening): 9000
 - Host IP: 192.168.34.1
 - Guest IP: 192.168.34.2
-- Path map: `this/directory/web` maps to `/var/www/web`  
+- Path map: `this/directory` maps to `/var/www`  
 
 For example, if you're using JetBrains PhpStorm:
 
