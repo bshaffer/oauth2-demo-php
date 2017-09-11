@@ -10,9 +10,13 @@ If this is your first time here, try [experimenting with the live demo](http://b
 Installation
 ------------
 
+We have provided a Vagrantfile for easy installation.  Vagrant is software that controls some of the major virtualization software such as [VMWare Workstation](https://www.vmware.com/products/workstation.html) and [Oracle VirtualBox](https://www.virtualbox.org/).  With a simple text file, you can clone a machine to run locally on your computer.  More details can be found at https://www.vagrantup.com. 
+
 ## With Vagrant
 
     $ vagrant up
+    
+Now browse to http://localhost:8080 to see the OAuth2 Demo Application
 
 ### xdebug (Optional)
 
@@ -31,7 +35,7 @@ For example, if you're using JetBrains PhpStorm:
 - Add a new server by clicking on the `...` beside `Server`
 - Set the `Host` to `localhost`
 - Set the `Port` to `8080`
-- Map the `web` directory to `/var/www/web`
+- Map this directory to `/var/www/`
 
 ![Servers](http://i.imgur.com/xeItbEg.png "Servers")
 
